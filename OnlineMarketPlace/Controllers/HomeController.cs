@@ -20,5 +20,13 @@ namespace OnlineMarketPlace.Controllers
         {
             return View("SellerItems");
         }
+        public ViewResult AddItem()
+        {
+            return View("ItemDetailsForm");
+        }
+        public ViewResult UpdateItem()
+        {
+            return View("ItemUpdateForm");
+        }
     }
 }
