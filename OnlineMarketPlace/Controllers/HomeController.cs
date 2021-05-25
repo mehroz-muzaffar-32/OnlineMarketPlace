@@ -20,6 +20,10 @@ namespace OnlineMarketPlace.Controllers
         {
             return View("BuyerProfileView");
         }
+        public ViewResult Search()
+        {
+            return View("Search");
+        }
         public ViewResult SellerItems()
         {
             return View("SellerItems");
