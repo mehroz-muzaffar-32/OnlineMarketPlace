@@ -36,5 +36,21 @@ namespace OnlineMarketPlace.Controllers
         {
             return View("ItemUpdateForm");
         }
+        public ViewResult LogIn()
+        {
+            return View();
+        }
+        public ViewResult Choice()
+        {
+            return View();
+        }
+        public ViewResult Signup_Buyer()
+        {
+            return View();
+        }
+        public ViewResult SignUp_Seller()
+        {
+            return View();
+        }
     }
 }
