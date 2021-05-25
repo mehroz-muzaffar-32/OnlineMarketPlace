@@ -16,5 +16,10 @@ namespace OnlineMarketPlace.Controllers
         {
             return View();
         }
+
+        public ViewResult BuyerView()
+        {
+            return View();
+        }
     }
 }
