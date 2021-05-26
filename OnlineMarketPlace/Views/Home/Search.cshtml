@@ -1,8 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid row  ">
-    <div class="container-fluid col-3 float-left bg-secondary text-white z-depth-1-half " >
+<div class="container-fluid row">
+    <div class="container-fluid col-3 float-left bg-secondary text-white z-depth-1-half ">
         <br />
         <span class="text-capitalize text-white" style="font-size:18px;"><i class="fas fa-filter"></i>&nbsp;&nbsp;FILTERS</span>
         <hr />
@@ -56,13 +56,64 @@
             <input class="form-check-input"
                    type="radio"
                    name="flexRadioDefault"
-                   id="flexRadioDefault2"
-                    />
+                   id="flexRadioDefault2" />
             <label class="form-check-label" for="flexRadioDefault2"> Order By Price (Descending) </label>
         </div>
         <br />
     </div>
-    <div class="container-fluid col-9 float-left align-content-center" >
-        
+    <div class="container-fluid col-9 float-left align-content-center">
+
+        <div id="card-stack" class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+
+        </div>
+
     </div>
+
+
+    
+    <div id="myModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <p class="text-default">Shop Name : CarreFour</p>
+                    <p class="text-default">Shop Address : Lower Mall Road l#1234</p>
+                    <p class="text-default">Email Address: mallroad@gmail.com</p>
+                    <p class="text-default">Contact  : +92345678996</p>
+                    <button type="button" class="btn btn-outline-secondary rounded-top waves-effect" data-dismiss="modal">
+                        Ok
+                    </button>
+                </div>
+                <div class="modal-footer text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        window.onload = () => {
+            $("#category a").on('click', function () {
+                alert($(this).data("value"));
+            });
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/shoes.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Shaper Shoes</h5><p class='card-text text-default'>Brand: Service</p><p class='card-text text-danger'>Price: Rs.5600</p><p class='card-text text-success'>Discount: 10%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/shoes2.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Nike Shoes</h5><p class='card-text text-default'>Brand: Stylo</p><p class='card-text text-danger'>Price: Rs.9000</p><p class='card-text text-success'>Discount: 15%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/shoes3.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Ladies Shoes</h5><p class='card-text text-default'>Brand: J.</p><p class='card-text text-danger'>Price: Rs.3000</p><p class='card-text text-success'>Discount: 20%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/shoes4.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Baby Shoes</h5><p class='card-text text-default'>Brand: Starlet</p><p class='card-text text-danger'>Price: Rs.7200</p><p class='card-text text-success'>Discount: 30%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/shirt.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Red Berry</h5><p class='card-text text-default'>Brand: J.</p><p class='card-text text-danger'>Price: Rs.2600</p><p class='card-text text-success'>Discount: 10%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/watch.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Brown Digger</h5><p class='card-text text-default'>Brand: Rolex</p><p class='card-text text-danger'>Price: Rs.55000</p><p class='card-text text-success'>Discount: 25%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/watch2.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Office Lover</h5><p class='card-text text-default'>Brand: Rolex</p><p class='card-text text-danger'>Price: Rs.99000</p><p class='card-text text-success'>Discount: 10%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/watch3.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Gold Miner</h5><p class='card-text text-default'>Brand: Rolex</p><p class='card-text text-danger'>Price: Rs.500000</p><p class='card-text text-success'>Discount: 5%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/watch4.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Royal</h5><p class='card-text text-default'>Brand: Rado</p><p class='card-text text-danger'>Price: Rs.1000000</p><p class='card-text text-success'>Discount: 40%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+            $("#card-stack").append("<div class='col-4 mb-2'><div class='card h-100'><img src='/pant.jpg' class='card-img-top img-fluid'/><div class='card-body text-center'><h5 class='card-title text-secondary'>Legs Fitter</h5><p class='card-text text-default'>Brand: FitMan</p><p class='card-text text-danger'>Price: Rs.4500</p><p class='card-text text-success'>Discount: 10%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' onclick='shopDetails()'><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>");
+        }
+        function logout(value) {
+            alert(value + " logout sucessfully");
+            localStorage.setItem("value", "Faizan Muhammad");
+            location.href = "/Home/ItemView";
+        }
+        function shopDetails() {
+            $("#myModal").modal({ show: true });
+        }
+    </script>
 </div>
