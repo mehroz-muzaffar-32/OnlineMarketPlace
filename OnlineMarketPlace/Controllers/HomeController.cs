@@ -56,5 +56,9 @@ namespace OnlineMarketPlace.Controllers
         {
             return View();
         }
+        public ViewResult ItemView()
+        {
+            return View();
+        }
     }
 }
