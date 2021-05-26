@@ -1,35 +1,45 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<body class="container-fluid bg-primary">
+<!--<body class="container-fluid bg-primary">-->
 
-    <div id="body" class="container border bg-white mt-5 rounded-top">
+<div id="body" class="container border bg-white mt-5 rounded-top">
 
-        <div id="card-stack" class="row row-cols-1 row-cols-md-3 g-4">
-
-        </div>
+    <div id="card-stack" class="row row-cols-1 row-cols-md-3 g-4 p-3">
 
     </div>
-    <script>
-        let names = ["Mercedes", "Benz", "Toyota", "Honda"];
+
+</div>
+<script>
+    let names = ["Mercedes", "Benz", "Toyota", "Honda"];
 
 
-        window.onload = () => {
-            /*itemsArea = window.document.createElement("div");
-            for (i = 0; i < names.length; i++) {
-                paragraph = document.createElement("p")
-                text = document.createTextNode(names[i]);
-                paragraph.appendChild(text);
-                itemsArea.appendChild(paragraph);
-            }
-            parent = document.getElementById("body");
-            parent.appendChild(itemsArea);*/
-
-            $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Benz</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
-            $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Mercedes</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
-            $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Toyota</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
-            $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Ferrari</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
-            $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Moto GP</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
+    window.onload = () => {
+       
+        $("#category a").on('click', function () {
+            alert($(this).data("value"));
+        });
+        /*itemsArea = window.document.createElement("div");
+        for (i = 0; i < names.length; i++) {
+            paragraph = document.createElement("p")
+            text = document.createTextNode(names[i]);
+            paragraph.appendChild(text);
+            itemsArea.appendChild(paragraph);
         }
-    </script>
-</body>
+        parent = document.getElementById("body");
+        parent.appendChild(itemsArea);*/
+
+        $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Benz</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
+        $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Mercedes</b><br>This is a longer card with supporting text below as a natuUrlaActionl lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
+        $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Toyota</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
+        $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Ferrari</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
+        $("#card-stack").append("<div class='col-4 mb-2'><div class='card'><div class='card-body'><h5 class='card-title'>My New Car</h5><p class='card-text'><b>Moto GP</b><br>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div></div></div>");
+    }
+
+    function logout(value) {
+        alert(value + " logout sucessfully");
+        localStorage.setItem("value", "Faizan Muhammad");
+        location.href = "/Home/ItemView";
+    }
+</script>
+<!--</body>-->
