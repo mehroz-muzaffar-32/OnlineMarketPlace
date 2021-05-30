@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineMarketPlace_Blazor.Models
 {
-    public class Item
+    public  class Item
     {
         public string ItemName { get; set; }
         public string Brand { get; set; }
