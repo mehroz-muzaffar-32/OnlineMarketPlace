@@ -5,35 +5,37 @@
 <div class="main">
 
     <div class="sticky-top">
-        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark position-relative">
+        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
             <!-- Container wrapper -->
-            <div class="container-fluid row">
-                <div class=" container-fluid col-2 float-left" style="min-width:90px;">
+            
+                <div class=" container-fluid m-set" style="min-width:fit-content();margin-right:auto;">
                     <!-- Navbar brand -->
+                    <span class="m-set ">
                     <a class="navbar-brand" href="#">
-                        <img src="appicon_w.svg" class="m-1" width="30" height="30" />Torico
+                       
+                        <img src="appicon_w.svg" width="30" height="30" />Torico
+                        
                     </a>
+                        </span>
                 </div>
-                <div class="container-fluid navbar-nav col-10 float-left" style="align-content:center;" id="navbarSupportedContent">
+                <div class="container-fluid navbar-nav float-left ml-auto mr-auto p-0" id="navbarSupportedContent">
 
-                    <div class="col-2 float-left"></div>
+                    
                     <!-- Search -->
-                    <div class="input-group col-6" style="align-content:center;min-width:423px;">
-                        <div class="form-outline">
-                            <input type="search" id="form1" style="transform:translateY(6px);width:60vh;" class="form-control" placeholder="Search" />
-                        </div>
-                        <button type="button" class="btn btn-success btn-md">
-                            <i class="fas fa-search"></i>
+                    <span style="display:contents">
+                            <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" />
+                       
+                        <button type="button" class="btn btn-success btn-md btn-set" style="width:fit-content();">
+                            <i class="fas fa-search"></i><span class=" text-set"></span>
                         </button>
-                    </div>
-                    <div class="col-2 float-left"></div>
-                    <div class="col-2 float-left">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li><button type="button" class="btn btn-success">Login/Registor</button></li>
-                        </ul>
-                    </div>
+                    </span>
                 </div>
-            </div>
+                <div class="container-fluid navbar-nav m-set m-auto" style="width:fit-content();">
+                        <span class="m-set ml-auto" >
+                     <button type="button" class="btn btn-success m-set ml-auto mr-auto" style="width:fit-content();">Login/Registor</button>
+                        </span>
+                </div>
+            
 
             <!-- Container wrapper -->
         </nav>
