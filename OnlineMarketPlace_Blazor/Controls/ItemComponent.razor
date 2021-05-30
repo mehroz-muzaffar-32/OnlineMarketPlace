@@ -2,7 +2,7 @@
 
     @foreach (Item item in DB)
     {
-        <div class='col-4 mb-2'><div class='card h-100'><img src='@item.Image' class='card-img-top img-fluid' style='width:100%;height:15vw;object-fit:cover'/><div class='card-body text-center'><h5 class='card-title text-secondary'>@item.ItemName</h5><p class='card-text text-default'>Brand: @item.Brand</p><p class='card-text text-danger'>Price: Rs.@item.Price</p><p class='card-text text-success'>Discount: @item.Discount%</p><button class='btn btn-outline-default btn-rounded-2 waves-effect' data-toggle="modal" data-target="#myModal"><i class='fas fa-store-alt'></i>  Shop Details</button></div></div></div>
+        <ItemCard item="@item"></ItemCard>    
     }
 
 </div>
@@ -15,11 +15,12 @@
                 <p class="text-default">Shop Address : Lower Mall Road l#1234</p>
                 <p class="text-default">Email Address: mallroad@gmail.com</p>
                 <p class="text-default">Contact  : +92345678996</p>
-                <button type="button" class="btn btn-outline-secondary rounded-top waves-effect" data-dismiss="modal">
-                    Ok
-                </button>
+                
             </div>
             <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-secondary rounded-top waves-effect ml-auto mr-auto" data-dismiss="modal">
+                    Ok
+                </button>
             </div>
         </div>
     </div>

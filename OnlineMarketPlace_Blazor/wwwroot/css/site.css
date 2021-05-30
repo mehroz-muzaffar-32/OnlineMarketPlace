@@ -18,7 +18,11 @@ a.navbar-brand {
         content:"  Search";
     }
 }
-
+.card-img-top-a {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
