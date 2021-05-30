@@ -1,0 +1,98 @@
+﻿@page "/Search"
+
+<div class="container-fluid row">
+    <div class="container-fluid col-3 float-left bg-secondary text-white z-depth-1-half ">
+        <br />
+        <span class="text-capitalize text-white" style="font-size:18px;"><i class="fas fa-filter"></i>&nbsp;&nbsp;FILTERS</span>
+
+        <hr />
+        <div>
+            <input type="text" id="typesearch2" class="form-control" style="height:30px;width:inherit;" placeholder="Search" />
+        </div>
+        <hr />
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="radio"
+                   name="flexRadioDefault1"
+                   id="flexRadioDefault1" />
+            <label class="form-check-label" for="flexRadioDefault1">  Search Shop </label>
+        </div>
+
+        <!-- Default checked radio -->
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="radio"
+                   name="flexRadioDefault1"
+                   id="flexRadioDefault2" />
+            <label class="form-check-label" for="flexRadioDefault2"> Search Product </label>
+        </div>
+        <hr />
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   value=""
+                   id="flexCheckDefault1" />
+            <label class="form-check-label" for="flexCheckDefault">
+                Search By Brand Name
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   value=""
+                   id="flexCheckDefault2" />
+            <label class="form-check-label" for="flexCheckDefault">
+                Search By Shop Name
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="checkbox"
+                   value=""
+                   id="flexCheckDefault3" />
+            <label class="form-check-label" for="flexCheckDefault">
+                Search By Product Name
+            </label>
+        </div>
+        <hr />
+        <label class="form-label" for="typeNumber1">Min Price</label>
+        <div class="range">
+            <input type="number" id="typeNumber1" class="form-control" style="height:30px;width:180px;" />
+        </div>
+        <label class="form-label" for="typeNumber2">Max Price</label>
+        <div class="range">
+            <input type="number" id="typeNumber2" class="form-control" style="height:30px;width:180px;" />
+        </div>
+        <hr />
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="radio"
+                   name="flexRadioDefault"
+                   id="flexRadioDefault1" />
+            <label class="form-check-label" for="flexRadioDefault1">  Order By Price (Ascending) </label>
+        </div>
+
+        <!-- Default checked radio -->
+        <div class="form-check">
+            <input class="form-check-input"
+                   type="radio"
+                   name="flexRadioDefault"
+                   id="flexRadioDefault2" />
+            <label class="form-check-label" for="flexRadioDefault2"> Order By Price (Descending) </label>
+        </div>
+        <hr />
+        <button class="btn btn-success btn-md" type="submit"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</button>
+        <br />
+    </div>
+    <div class="container-fluid col-9 float-left align-content-center">
+
+        <div id="card-stack" class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+
+        </div>
+
+    </div>
+</div>
+@code {
+
+
+}

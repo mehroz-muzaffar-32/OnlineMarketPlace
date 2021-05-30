@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketPlace", "OnlineMarketPlace\OnlineMarketPlace.csproj", "{46A8C03D-EE49-4880-ACC7-48B1DA22DCC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketPlace_Blazor", "OnlineMarketPlace_Blazor\OnlineMarketPlace_Blazor.csproj", "{438BCB32-EC46-44A3-96BA-749803ECAC3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineMarketPlace_Blazor", "OnlineMarketPlace_Blazor\OnlineMarketPlace_Blazor.csproj", "{438BCB32-EC46-44A3-96BA-749803ECAC3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
