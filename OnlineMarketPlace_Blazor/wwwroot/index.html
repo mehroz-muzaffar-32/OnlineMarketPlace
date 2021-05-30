@@ -4,14 +4,65 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>OnlineMarketPlace_Blazor</title>
+    <title>Torico</title>
     <base href="/" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <style>
+        .imgLogo {
+            animation-name: example;
+            animation-duration: 4s;
+        }
+
+        @keyframes example {
+            0% {
+                transform: translate(49vw,180px);
+            }
+
+            100% {
+                transform: translate(15vw,180px);
+            }
+        }
+
+        #imgBrand {
+            animation-name: example2;
+            animation-duration: 4s;
+        }
+
+        @keyframes example2 {
+            0% {
+                transform: translate(0vw,-10px);
+                opacity: 0;
+            }
+
+            99% {
+                transform: translate(45vw,-10px);
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <app>Loading...</app>
+<body style="margin:0px;" >
+    <app>
+        <div class="container-fluid bg-secondary" style="width:100%;height:100vh;overflow:hidden">
+            <img class="imgLogo" src="appicon_w.svg" style="width:40%;height:40%;transform:translate(15vw,180px);" />
+            <p id="imgBrand" class="text-white text-capitalize" style="font-size:100px;transform: translate(45vw,-10px); width:100px">TORICO</p>
+            <div style="height:50px;margin:0px;padding:0px; width:50px;transform:translate(45vw,150px)">
+                <div class="spinner-border text-light" role="status" />
+            </div>
+        </div>
+    </app>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -19,6 +70,15 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
 </body>
 
 </html>
