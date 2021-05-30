@@ -1,15 +1,79 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+
 
 <div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-    </div>
 
-    <div class="content px-4">
-        @Body
+    <div class="sticky-top">
+        <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
+            <!-- Container wrapper -->
+            
+                <div class=" container-fluid m-set" style="min-width:fit-content();margin-right:auto;">
+                    <!-- Navbar brand -->
+                    <span class="m-set ">
+                    <a class="navbar-brand" href="#">
+                       
+                        <img src="appicon_w.svg" width="30" height="30" />Torico
+                        
+                    </a>
+                        </span>
+                </div>
+                <div class="container-fluid navbar-nav float-left ml-auto mr-auto p-0" id="navbarSupportedContent">
+
+                    
+                    <!-- Search -->
+                    <span style="display:contents">
+                            <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" />
+                       
+                        <button type="button" class="btn btn-success btn-md btn-set" style="width:fit-content();">
+                            <i class="fas fa-search"></i><span class=" text-set"></span>
+                        </button>
+                    </span>
+                </div>
+                <div class="container-fluid navbar-nav m-set m-auto" style="width:fit-content();">
+                        <span class="m-set ml-auto" >
+                     <button type="button" class="btn btn-success m-set ml-auto mr-auto" style="width:fit-content();">Login/Registor</button>
+                        </span>
+                </div>
+            
+
+            <!-- Container wrapper -->
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light position-relative">
+            <div class="container-fluid">
+                <ul class="navbar-nav mr-auto">
+                    <!-- Dropdown -->
+                    <li class="nav-item">
+
+                        <div class="dropdown">
+                            <button class="btn btn-purple dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-list"></i>&nbsp;&nbsp;Categories
+                            </button>
+                            <div id="category" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#" data-value="men">Men's Appearal</a>
+                                <a class="dropdown-item" href="#" data-value="children">Children's Appearal</a>
+                                <a class="dropdown-item" href="#" data-value="women">Women's Appearal</a>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-purple"><i class="fas fa-user"></i>&nbsp;&nbsp;Profile</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-purple btn-rounded btn-floating">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-danger mr-auto"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
+<div>@Body</div>
 </div>
