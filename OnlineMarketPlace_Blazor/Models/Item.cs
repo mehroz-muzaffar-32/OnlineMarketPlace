@@ -12,6 +12,7 @@ namespace OnlineMarketPlace_Blazor.Models
         public string Image { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
-        public string Category { get; set; } = "Others";
+        public string Category { get; set; } = "Other";
+        public int Quantity { get; set; } = 0;
     }
 }

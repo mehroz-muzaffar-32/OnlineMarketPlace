@@ -2,17 +2,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
-                <img style="width:inherit" src="@ListItemValue.Image" />
+                <img style="width:inherit;height:200px;object-fit:contain;" src="@ListItemValue.Image" alt="No Image of this Product" />
             </div>
             <div class="col-6 align-top">
                 <h3 class="h3">@ListItemValue.ItemName</h3>
-                <h5 class="h5">Quantity: <span class="font-weight-light">4</span></h5>
+                <h5 class="h5">Quantity: <span class="font-weight-light">@ListItemValue.Quantity</span></h5>
                 <h5 class="h5">Price: <span class="font-weight-light">Rs.@String.Format("{0:n0}", ListItemValue.Price)</span></h5>
                 <h5 class="h5">Brand: <span class="font-weight-light">@ListItemValue.Brand</span></h5>
                 <h5 class="h5">Category: <span class="font-weight-light">@ListItemValue.Category</span></h5>
             </div>
             <div class="col-4 text-right">
-                <a class="btn btn-warning" href="/UpdateItem">Update</a>
+                <a class="btn btn-warning" href="/UpdateItem/@ItemsList.IndexOf(ListItemValue)">Update</a>
                 <button class="btn btn-danger" @onclick="@(CallMethod)">Remove</button>
             </div>
         </div>

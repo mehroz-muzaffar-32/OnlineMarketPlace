@@ -17,7 +17,7 @@
 }
 else if (Layout == "Grid")
 {
-    <div class="container-fluid col-9 float-left align-content-center">
+    <div class="container-fluid float-left align-content-center">
         @foreach (Item item in ItemsRepository.ItemsList)
         {
             <GridItem GridItemValue=@item CallBackRemove="RemoveItem"></GridItem>
