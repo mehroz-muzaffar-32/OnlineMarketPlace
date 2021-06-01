@@ -5,25 +5,18 @@
         <hr />
     </div>
     <br />
-    
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-        <!--Controls-->
         <div class="controls-top">
             <a class="btn btn-purple btn-floating mr-auto waves-effect" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
             <a class="btn btn-purple btn-floating ml-auto waves-effect" href="#multi-item-example" data-slide="next">
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>
-        <!--Indicators-->
         <ol class="carousel-indicators">
             <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
             <li data-target="#multi-item-example" data-slide-to="1"></li>
-
         </ol>
-        <!--/.Indicators-->
-        <!--Slides-->
         <div class="carousel-inner" role="listbox">
-
             @for(int i=0;i<DB.Count;i++)
             {
                 @if(i==0)
@@ -43,11 +36,8 @@
                 i++;
             }
                 </div>
-
             }
         </div>
-        <!--/.Slides-->
-
     </div>
 </div>
 <div id="myModal" class="modal fade" tabindex="-1">
@@ -58,7 +48,6 @@
                 <p class="text-default">Shop Address : Lower Mall Road l#1234</p>
                 <p class="text-default">Email Address: mallroad@gmail.com</p>
                 <p class="text-default">Contact  : +92345678996</p>
-
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-outline-secondary rounded-top waves-effect ml-auto mr-auto" data-dismiss="modal">
