@@ -11,7 +11,7 @@
                 <div class=" container-fluid m-set" style="min-width:fit-content();margin-right:auto;">
                     <!-- Navbar brand -->
                     <span class="m-set ">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                        
                         <img src="appicon_w.svg" width="30" height="30" />&nbsp;Torico
                         
@@ -32,7 +32,7 @@
                 </div>
                 <div class="container-fluid navbar-nav m-set m-auto" style="width:fit-content();">
                         <span class="m-set ml-auto" >
-                     <button type="button" class="btn btn-success m-set ml-auto mr-auto waves-effect" style="width:fit-content();">Login/Registor</button>
+                     <a class="btn btn-success m-set ml-auto mr-auto waves-effect" href="/login" style="width:fit-content();">Login/Registor</a>
                         </span>
                 </div>
             
@@ -58,12 +58,12 @@
 
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-purple waves-effect"><i class="fas fa-user"></i>&nbsp;&nbsp;Profile</button>
+                        <a class="btn btn-purple waves-effect" href="/spc"><i class="fas fa-user"></i>&nbsp;&nbsp;Profile</a>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-purple btn-rounded btn-floating waves-effect">
-                            <i class="fas fa-envelope"></i>
-                        </button>
+                        <a href="/SellerItems" class="btn btn-purple btn-rounded btn-floating waves-effect">
+                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Added Items
+                        </a>
                     </li>
 
                 </ul>
@@ -75,5 +75,10 @@
             </div>
         </nav>
     </div>
-<div>@Body</div>
+    <div>
+    @Body
+    </div>
+    <div class="container-fluid" style="text-align:center;color:gray;">
+        <span style="font-size:12px">Created By BSEF18M004-Mehroz Muzaffar, BSEF18M007-Gull Sher Khan, BSEF18M023-Faizan Muhammad, BSEF18M043-Faraz Ali, BSEF18M046-Ahsen Mehmoord</span>
+    </div>
 </div>
