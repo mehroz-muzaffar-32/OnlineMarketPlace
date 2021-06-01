@@ -7,7 +7,7 @@
             <p class='card-text text-default'>Brand: @item.Brand</p>
             <p class='card-text text-danger'>Price: Rs.@item.Price</p>
             <p class='card-text text-success'>Discount: @item.Discount%</p>
-            <button class='btn btn-outline-default btn-rounded-2 waves-effect' data-toggle="modal" data-target="#myModal">
+            <button class='btn btn-outline-default btn-rounded-2 waves-effect' data-toggle="modal" data-target="#myModal" onclick="gtag('event', 'click', {'event_category' : 'ItemCard','event_label' : 'ShopDetails'});">
                 <i class='fas fa-store-alt'></i>  Shop Details
             </button>
         </div>
