@@ -1,92 +1,66 @@
 ﻿@inherits LayoutComponentBase
-
-
-
 <div class="main">
-
     <div class="sticky-top">
         <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
-            <!-- Container wrapper -->
-            
-                <div class=" container-fluid m-set" style="min-width:fit-content();margin-right:auto;">
-                    <!-- Navbar brand -->
-                    <span class="m-set ">
-                    <a class="navbar-brand" href="/" onclick="gtag('event', 'click', {'event_category' : 'Link',
-  'home' : 'Home'});">
-                       
+            <div class=" container-fluid m-set" style="min-width:fit-content();margin-right:auto;">
+                <span class="m-set ">
+                    <a class="navbar-brand" href="/" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Home'});">
                         <img src="appicon_w.svg" width="30" height="30" />&nbsp;Torico
-                        
                     </a>
-                        </span>
-                </div>
-                <div class="container-fluid navbar-nav float-left ml-auto mr-auto p-0" id="navbarSupportedContent">
-
-                    
-                    <!-- Search -->
-                    <span style="display:contents">
-                            <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" />
-                       
-                        <button type="button" class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();"onclick="gtag('event', 'click', {'event_category' : 'button',
-  'search' : 'search'});">
-                            <i class="fas fa-search"></i><span class=" text-set"></span>
-                        </button>
-                    </span>
-                </div>
-                <div class="container-fluid navbar-nav m-set m-auto" style="width:fit-content();">
-                        <span class="m-set ml-auto" >
-                     <a class="btn btn-success m-set ml-auto mr-auto waves-effect" href="/login" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'link',
-  'register' : 'login'});">Login/Registor</a>
-                        </span>
-                </div>
-            
-
-            <!-- Container wrapper -->
+                </span>
+            </div>
+            <div class="container-fluid navbar-nav float-left ml-auto mr-auto p-0" id="navbarSupportedContent">
+                <span style="display:contents">
+                    <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" />
+                    <button type="button" class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Search'});">
+                        <i class="fas fa-search"></i><span class=" text-set"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="container-fluid navbar-nav m-set m-auto" style="width:fit-content();">
+                <span class="m-set ml-auto">
+                    <a class="btn btn-success m-set ml-auto mr-auto waves-effect" href="/login" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Login'});">Login/Registor</a>
+                </span>
+            </div>
         </nav>
         <nav class="navbar navbar-expand-lg navbar-light bg-light position-relative">
             <div class="container-fluid">
                 <ul class="navbar-nav mr-auto">
-                    <!-- Dropdown -->
                     <li class="nav-item">
-
                         <div class="dropdown">
-                            <button class="btn btn-purple dropdown-toggle waves-effect" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="gtag('event', 'click', {'event_category' : 'button',
-  'category' : 'category'});">
+                            <button class="btn btn-purple dropdown-toggle waves-effect" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'category'});">
                                 <i class="fas fa-list"></i>&nbsp;&nbsp;Categories
                             </button>
                             <div id="category" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" data-value="men" onclick="gtag('event', 'click', {'event_category' : 'Button',
-  'category' : 'Mens Appearal'});">Men's Appearal</a>
-                                <a class="dropdown-item" href="#" data-value="children" onclick="gtag('event', 'click', {'event_category' : 'button',
-  'category' : 'womens category'});">Children's Appearal</a>
-                                <a class="dropdown-item" href="#" data-value="women" onclick="gtag('event', 'click', {'event_category' : 'button',
-  'category' : 'childrens category'});">Women's Appearal</a>
+                                <a class="dropdown-item" href="#" data-value="men" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Mens Appearal'});">Men's Appearal</a>
+                                <a class="dropdown-item" href="#" data-value="children" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Womens Appearal'});">Children's Appearal</a>
+                                <a class="dropdown-item" href="#" data-value="women" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Childrens Appearal'});">Women's Appearal</a>
                             </div>
                         </div>
-
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-purple waves-effect" href="/spc"><i class="fas fa-user" onclick="gtag('event', 'click', {'event_category' : 'link',
-  'profile' : 'profile'});"></i>&nbsp;&nbsp;Profile</a>
+                        <a class="btn btn-purple waves-effect" href="/spc">
+                            <i class="fas fa-user" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Profile'});"></i>&nbsp;&nbsp;Profile
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/SellerItems" class="btn btn-purple btn-rounded btn-floating waves-effect" onclick="gtag('event', 'click', {'event_category' : 'link',
-  'items' : 'added items'});">
+                        <a href="/SellerItems" class="btn btn-purple btn-rounded btn-floating waves-effect" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Added Items'});">
                             <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Added Items
                         </a>
                     </li>
-
                 </ul>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <button type="button" class="btn btn-danger mr-auto waves-effect" onclick="gtag('event', 'click', {'event_category' : 'button',
-  'event_label' : 'logout'});"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</button>
+                        <button type="button" class="btn btn-danger mr-auto waves-effect" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Logout'});">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
+                        </button>
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
     <div>
-    @Body
+        @Body
     </div>
     <div class="container-fluid" style="text-align:center;color:gray;">
         <span style="font-size:12px">Created By BSEF18M004-Mehroz Muzaffar, BSEF18M007-Gull Sher Khan, BSEF18M023-Faizan Muhammad, BSEF18M043-Faraz Ali, BSEF18M046-Ahsen Mehmoord</span>
