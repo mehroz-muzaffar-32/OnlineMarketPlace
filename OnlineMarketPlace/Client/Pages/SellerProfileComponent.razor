@@ -1,0 +1,70 @@
+﻿@page "/spc" 
+<br />
+<div class="container-fluid row">
+    <div class="col-2">
+    </div>
+    <div class="m-0 container col-8 ">
+        <h1>Edit Profile</h1>
+        <hr>
+        <h3>Seller Personal info</h3>
+        <div>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Shop Name:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" name="shopName" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="email" name="email" value="" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Phone Number:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" name="phoneNumber" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Address:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" name="address" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Old Password:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="password" name="oldPasswd" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">New Password:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="password" name="newPasswd" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <input type="submit" onclick="gtag('event', 'click', {'event_category' : 'Signup','event_label' : 'Signup'});" class="btn btn-purple waves-effect" value="Save Changes">
+                        <span></span>
+                        <input type="reset" class="btn btn-outline-danger waves-effect" value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="col-2">
+
+    </div>
+</div>
+
+
+
+
+@code {
+
+}

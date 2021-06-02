@@ -1,0 +1,75 @@
+﻿<div class="container my-4">
+    <br />
+    <div style="margin-right:15px;margin-left:15px;">
+        <h3>Latest Products</h3>
+        <hr />
+    </div>
+    <br />
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+        <div class="controls-top">
+            <a class="btn btn-purple btn-floating mr-auto waves-effect" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+            <a class="btn btn-purple btn-floating ml-auto waves-effect" href="#multi-item-example" data-slide="next">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <ol class="carousel-indicators">
+            <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+            <li data-target="#multi-item-example" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            @for(int i=0;i<DB.Count;i++)
+            {
+                @if(i==0)
+                {
+                    <div class="carousel-item active">
+                    @for(int j=0;j<4;j++)
+                    {
+                        <ItemCard item="DB[j]"></ItemCard>
+                    }
+                    </div>
+                    i += 3;
+                }
+                <div class="carousel-item">
+            @for (int j=0; j < 4 && i<DB.Count; j++)
+            {
+                <ItemCard item="DB[i]"></ItemCard>
+                i++;
+            }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <p class="text-default">Shop Name : CarreFour</p>
+                <p class="text-default">Shop Address : Lower Mall Road l#1234</p>
+                <p class="text-default">Email Address: mallroad@gmail.com</p>
+                <p class="text-default">Contact  : +92345678996</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-secondary rounded-top waves-effect ml-auto mr-auto" data-dismiss="modal">
+                    Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    
+    public List<Item> DB { get; set; } = new List<Item>
+{
+        new Item{ItemName="Shaper Shoes",Brand="Shaper",Image="/shoes.jpg",Price=1234,Discount=12},
+        new Item{ItemName="Nike Shoes",Image="/shoes2.jpg",Price=12000,Discount=30},
+        new Item{ItemName="Ladies Shoes",Image="/shoes3.jpg",Price=40000,Discount=20},
+        new Item{ItemName="Baby Shoes",Image="/shoes4.jpg",Price=50000,Discount=10},
+        new Item{ItemName="Red Berry",Image="/shirt.jpg",Price=40000,Discount=5},
+        new Item{ItemName="Brown Digger",Image="/watch.jpg",Price=900000,Discount=15},
+        new Item{ItemName="Office Love",Image="/watch2.jpg",Price=35000,Discount=25},
+        new Item{ItemName="Gold Mine",Image="/watch3.jpg",Price=400000,Discount=30},
+        new Item{ItemName="Royal",Image="/watch4.jpg",Price=5000000,Discount=35},
+        new Item{ItemName="Legs Fitter",Image="/pant.jpg",Price=4000,Discount=50}
+    };
+}
