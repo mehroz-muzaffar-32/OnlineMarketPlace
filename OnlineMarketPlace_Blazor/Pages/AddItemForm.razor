@@ -1,6 +1,6 @@
 ﻿@page "/AddItem"
 @inject NavigationManager manager
-
+@inject IJSRuntime JS
 <h4 class="text-center mt-4">Please Enter Product Details Below:</h4>
 <form class="text-left" id="addform">
     <input type="hidden" asp-for="Type" value="Regular" />
@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <td colspan="2" class="text-right">
-                <input class="btn btn-success" type="button" value="Add Product" @onclick="SubmitForm"/>
+                <input class="btn btn-success" id="submitBtn" type="button" value="Add Product" @onclick="SubmitForm"/>
             </td>
         </tr>
     </table>
@@ -60,9 +60,11 @@
 
 @code {
     Item value = new Item();
-    void SubmitForm()
+    async Task SubmitForm()
     {
         ItemsRepository.ItemsList.Add(value);
+        await JS.InvokeVoidAsync("gtagH");
         manager.NavigateTo("/SellerItems");
+
     }
 }

@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Torico</title>
@@ -64,6 +65,7 @@
 </head>
 
 <body style="margin:0px;">
+    
     <app>
         <div class="container-fluid bg-secondary" style="width:100%;height:100vh;overflow:hidden">
             <img class="imgLogo" src="appicon_w.svg" style="width:40%;height:40%;transform:translate(15vw,180px);" />
@@ -91,7 +93,11 @@
 
     <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="_content/MatBlazor/dist/matBlazor.js"></script>
-
+    <script>
+        function gtagH() {
+            gtag('event', 'click', { 'event_category': 'AddItems', 'event_label': 'NewItem' });
+        }
+    </script>
 </body>
 
 </html>
