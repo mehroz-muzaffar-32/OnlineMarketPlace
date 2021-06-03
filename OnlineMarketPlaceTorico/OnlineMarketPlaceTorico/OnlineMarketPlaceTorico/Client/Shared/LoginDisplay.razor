@@ -6,12 +6,14 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.Identity.Name!</a>
+        <a href="authentication/profile">Hello, @context.User.Identity.Name!</a> <!--TODO change this one-->
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
     </Authorized>
     <NotAuthorized>
-        <a href="authentication/register">Register</a>
-        <a href="authentication/login">Log in</a>
+        <span class="m-set ml-auto">
+            <!--TODO add href ,, authentication/register + authentication/login-->
+            <a class="btn btn-success m-set ml-auto mr-auto waves-effect" href="/login" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Login'});">Login/Registor</a>
+        </span>
     </NotAuthorized>
 </AuthorizeView>
 
