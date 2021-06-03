@@ -1,6 +1,6 @@
 ﻿@page "/UpdateItem/{Index:int}"
 @inject NavigationManager manager
-
+<!--TODO look at these red lines/errors, code works correctly but somehow it shows errors.  -->
 <h4 class="text-center mt-4">Please Change Following Details (if any):</h4>
 <form action="/SellerItems" class="text-left" method="get" runat="server" EncType="multipart/form-data">
     <input type="hidden" asp-for="Type" value="Regular" />
