@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using OnlineMarketPlaceTorico.Server.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html>
 <!--adasdasda-->
 <head>
@@ -47,7 +52,19 @@
                     </span>
                 </div>
                 <div class="container-fluid navbar-nav m-set m-auto" style="width:fit-content();">
-                    <LoginDisplay />
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <span class="m-set ml-auto">
+                            <a id="manage" class="btn btn-success m-set ml-auto mr-auto waves-effect" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="m-set ml-auto">
+                            <!--TODO add href ,, authentication/register + authentication/login-->
+                            <a class="btn btn-success m-set ml-auto mr-auto waves-effect" asp-area="Identity" asp-page="/Account/Login" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Login'});">Login/Registor</a>
+                        </span>
+                    }
                 </div>
             </nav>
             <nav class="navbar navbar-expand-lg navbar-light bg-light position-relative">
@@ -78,9 +95,11 @@
                     </ul>
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-danger mr-auto waves-effect" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Logout'});">
-                                <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
-                            </button>
+                            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                                <button type="submit" class="btn btn-danger mr-auto waves-effect" >
+                                    <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>

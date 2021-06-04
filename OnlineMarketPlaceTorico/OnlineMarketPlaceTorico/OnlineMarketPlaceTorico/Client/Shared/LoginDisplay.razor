@@ -6,8 +6,9 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.Identity.Name!</a> <!--TODO change this one-->
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
+        <span class="m-set ml-auto">
+            <a id="manage" class="btn btn-success m-set ml-auto mr-auto waves-effect" href="authentication/profile" >@context.User.Identity.Name</a>
+        </span>
     </Authorized>
     <NotAuthorized>
         <span class="m-set ml-auto">
@@ -18,7 +19,7 @@
 </AuthorizeView>
 
 @code{
-    private async Task BeginSignOut(MouseEventArgs args)
+    public async Task BeginSignOut()
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
