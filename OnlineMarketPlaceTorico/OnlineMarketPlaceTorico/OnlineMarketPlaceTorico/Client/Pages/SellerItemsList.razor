@@ -1,0 +1,43 @@
+﻿@page "/SellerItems"
+
+<div class="ml-4 mt-4">
+    <a class="btn btn-success" href="/AddItem">Add Product</a>
+    <button class="btn btn-dark" @onclick="@(e=>SetLayout("List"))">List View</button>
+    <button class="btn btn-dark" @onclick="@(e=>SetLayout("Grid"))">Grid View</button>
+</div>
+
+@if (Layout == "List")
+{
+    <div class="list-group">
+        @foreach (Item item in ItemsRepository.ItemsList)
+        {
+            <ListItem ListItemValue=@item CallBackRemove="RemoveItem"></ListItem>
+        }
+    </div>
+}
+else if (Layout == "Grid")
+{
+    <div class="container-fluid float-left align-content-center">
+        @foreach (Item item in ItemsRepository.ItemsList)
+        {
+            <GridItem GridItemValue=@item CallBackRemove="RemoveItem"></GridItem>
+        }
+    </div>
+}
+
+@code {
+    string Layout { get; set; } = ItemsRepository.View;
+    void SetLayout(string value)
+    {
+        Layout = value;
+        ItemsRepository.View = value;
+    }
+    void RemoveItem(string name)
+    {
+        ItemsRepository.ItemsList.RemoveAll(item => item.ItemName == name);
+    }
+    void AddNewItem(Item item)
+    {
+        ItemsRepository.ItemsList.Add(item);
+    }
+}

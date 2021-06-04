@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketPlaceTorico.Server", "OnlineMarketPlaceTorico\Server\OnlineMarketPlaceTorico.Server.csproj", "{DE155757-F569-4105-BD17-5886092D4233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketPlaceTorico.Client", "OnlineMarketPlaceTorico\Client\OnlineMarketPlaceTorico.Client.csproj", "{5CE00069-93FE-4106-A767-E59FBF02EE09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineMarketPlaceTorico.Shared", "OnlineMarketPlaceTorico\Shared\OnlineMarketPlaceTorico.Shared.csproj", "{30002271-BE2E-4856-A3F2-530D9B84193C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE155757-F569-4105-BD17-5886092D4233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE155757-F569-4105-BD17-5886092D4233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE155757-F569-4105-BD17-5886092D4233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE155757-F569-4105-BD17-5886092D4233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CE00069-93FE-4106-A767-E59FBF02EE09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE00069-93FE-4106-A767-E59FBF02EE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE00069-93FE-4106-A767-E59FBF02EE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE00069-93FE-4106-A767-E59FBF02EE09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30002271-BE2E-4856-A3F2-530D9B84193C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30002271-BE2E-4856-A3F2-530D9B84193C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30002271-BE2E-4856-A3F2-530D9B84193C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30002271-BE2E-4856-A3F2-530D9B84193C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7944C11-FC75-45E1-86FD-2AE7EB2683F7}
+	EndGlobalSection
+EndGlobal
