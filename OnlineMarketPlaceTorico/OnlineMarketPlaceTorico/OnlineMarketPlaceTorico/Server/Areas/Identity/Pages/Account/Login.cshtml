@@ -14,7 +14,7 @@
             <input asp-for="Input.Password" class="form-control" id="password" required />
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
-        <div class="checkbox">
+        <div class="checkbox form-group">
             <label asp-for="Input.RememberMe">
                 <input class="form-check-input" asp-for="Input.RememberMe" />
                 @Html.DisplayNameFor(m => m.Input.RememberMe)
@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <p>
-                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a><!--TODO change/update this-->
+                <a id="forgot-password" class="text-center" asp-page="./ForgotPassword">Forgot your password?</a><!--TODO change/update this-->
             </p>
         </div>
     </form>

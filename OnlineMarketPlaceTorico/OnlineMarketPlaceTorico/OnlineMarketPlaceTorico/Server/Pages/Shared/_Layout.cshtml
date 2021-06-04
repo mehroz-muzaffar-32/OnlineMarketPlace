@@ -1,20 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
-
+<!--adasdasda-->
 <head>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Torico</title>
-    <link href="css/app.css" rel="stylesheet" />
+    <link href="~/css/app.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <!--matblazor-->
 
-    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="css/site.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-198334630-1"></script>
@@ -34,7 +34,7 @@
                 <div class=" container-fluid m-set" style="min-width:fit-content();margin-right:auto;">
                     <span class="m-set ">
                         <a class="navbar-brand" href="/" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Home'});">
-                            <img src="appicon_w.svg" width="30" height="30" />&nbsp;Torico
+                            <img src="~/appicon_w.svg" width="30" height="30" />&nbsp;Torico
                         </a>
                     </span>
                 </div>
@@ -93,7 +93,6 @@
             <span style="font-size:12px">Created By BSEF18M004-Mehroz Muzaffar, BSEF18M007-Gull Sher Khan, BSEF18M023-Faizan Muhammad, BSEF18M043-Faraz Ali, BSEF18M046-Ahsen Mehmoord</span>
         </div>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -103,12 +102,13 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
-    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script>
         function gtagH() {
             gtag('event', 'click', { 'event_category': 'AddItems', 'event_label': 'NewItem' });
         }
     </script>
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>
