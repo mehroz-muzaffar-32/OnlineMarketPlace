@@ -37,23 +37,27 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-purple waves-effect" href="/spc">
-                            <i class="fas fa-user" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Profile'});"></i>&nbsp;&nbsp;View Personal Info
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/SellerItems" class="btn btn-purple btn-rounded btn-floating waves-effect" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Added Items'});">
-                            <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Added Items
-                        </a>
-                    </li>
+                    <AuthorizeView>
+                        <li class="nav-item">
+                            <a class="btn btn-purple waves-effect" href="/spc">
+                                <i class="fas fa-user" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Profile'});"></i>&nbsp;&nbsp;View Personal Info
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/SellerItems" class="btn btn-purple btn-rounded btn-floating waves-effect" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Added Items'});">
+                                <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Added Items
+                            </a>
+                        </li>
+                    </AuthorizeView>
                 </ul>
                 <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-danger mr-auto waves-effect" @onclick="clickFun">
-                            <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
-                        </button>
-                    </li>
+                    <AuthorizeView>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-danger mr-auto waves-effect" @onclick="clickFun">
+                                <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
+                            </button>
+                        </li>
+                     </AuthorizeView>
                 </ul>
             </div>
         </nav>
