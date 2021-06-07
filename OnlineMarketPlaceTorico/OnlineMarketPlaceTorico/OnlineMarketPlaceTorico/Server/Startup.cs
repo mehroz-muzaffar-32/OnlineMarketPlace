@@ -57,7 +57,7 @@ namespace OnlineMarketPlaceTorico.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
                 app.UseWebAssemblyDebugging();
             }
             else
