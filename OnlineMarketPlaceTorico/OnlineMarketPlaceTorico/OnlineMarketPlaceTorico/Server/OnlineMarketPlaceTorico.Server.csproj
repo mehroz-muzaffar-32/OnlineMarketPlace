@@ -56,6 +56,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\Shared\Category.cs" Link="Category.cs" />
+    <Compile Include="..\Shared\OnlineMarketPlace_DBContext.cs" Link="OnlineMarketPlace_DBContext.cs" />
+    <Compile Include="..\Shared\Product.cs" Link="Product.cs" />
+    <Compile Include="..\Shared\Seller.cs" Link="Seller.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="css\app.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -261,8 +268,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
