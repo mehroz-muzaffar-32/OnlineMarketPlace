@@ -1,0 +1,26 @@
+﻿<div class="modal fade modal-open" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <!--<p class="text-default">Shop Name : Carrefour</p>
+                <p class="text-default">Shop Address : Lower Mall Road l#1234</p>
+                <p class="text-default">Email Address: mallroad@gmail.com</p>
+                <p class="text-default">Contact  : +92345678996</p>-->
+                <p class="text-default">Shop Name : @SellerShop.ShopName</p>
+                <p class="text-default">Shop Address : @SellerShop.Address</p>
+                <p class="text-default">Email Address: @SellerShop.Email</p>
+                <p class="text-default">Contact  : @SellerShop.Contact</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-secondary rounded-top waves-effect ml-auto mr-auto" data-dismiss="modal">
+                    Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Seller SellerShop { get; set; } =new Seller();
+}

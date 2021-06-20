@@ -12,8 +12,8 @@
             </div>
             <div class="container-fluid navbar-nav float-left ml-auto mr-auto p-0" id="navbarSupportedContent">
                 <span style="display:contents">
-                    <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" />
-                    <a href="/search" class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Search'});">
+                    <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" @bind-value="NavbarString"/>
+                    <a href="/search/@Category/@NavbarString" class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Search'});">
                         <i class="fas fa-search"></i><span class=" text-set"></span>
                     </a>
                 </span>
@@ -31,9 +31,12 @@
                                 <i class="fas fa-list"></i>&nbsp;&nbsp;Categories
                             </button>
                             <div id="category" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" data-value="men" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Mens Appearal'});">Men's Appearal</a>
-                                <a class="dropdown-item" href="#" data-value="children" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Womens Appearal'});">Children's Appearal</a>
-                                <a class="dropdown-item" href="#" data-value="women" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Childrens Appearal'});">Women's Appearal</a>
+                                <!--I removed this tag => gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Mens Appearal'});-->
+                                <a class="dropdown-item"  data-value="men" @onclick='()=>Category="men"'>Men's Appearal</a>
+                                <!--I removed this tag => gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Womens Appearal'});-->
+                                <a class="dropdown-item"  data-value="children" @onclick='()=>Category="children"'>Children's Appearal</a>
+                                <!--I removed this tag => gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Childrens Appearal'});-->
+                                <a class="dropdown-item"  data-value="women" @onclick='()=>Category="woman"'>Women's Appearal</a>
                             </div>
                         </div>
                     </li>
@@ -70,6 +73,7 @@
     </div>
 </div>
 @code{
+    
     private LoginDisplay ld;
     async Task clickFun()
     {
@@ -77,4 +81,7 @@
         await JS.InvokeVoidAsync("gtagH");
         await ld.BeginSignOut();
     }
+
+    private string? NavbarString { get; set; } = null;
+    private string? Category { get; set; } = null;
 }

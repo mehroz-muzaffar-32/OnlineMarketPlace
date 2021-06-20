@@ -1,0 +1,27 @@
+﻿<div class='col-md-3 float-left mt-2 mb-2'>
+    <div class="card text-center">
+        <div class="card-header bg-white">
+        </div>
+        <div class="card-body">
+            <h5 class="card-text text-secondary">Shop Name: @shop.ShopName</h5>
+            <h5 class="card-text text-secondary">Address: @shop.Address</h5>
+            <h5 class="card-text text-secondary">Contact: @shop.Contact</h5>
+            <h5 class="card-text text-secondary">Email: @shop.Email</h5>
+            <button class='btn btn-outline-danger waves-effect' @onclick="()=>fun(shop.Id)">
+                <i class='fas fa-store-alt'></i>  ViSit SHoP
+            </button>
+        </div>
+        <div class="card-footer bg-secondary">
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter]
+    public Seller shop { get; set; }
+    [Parameter]
+    public EventCallback<int> Callback{ get; set; }
+    public void fun(int id)
+    {
+        Callback.InvokeAsync(id);
+    }
+}

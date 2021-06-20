@@ -1,4 +1,5 @@
-﻿<div class="container my-4">
+﻿@inject ProductService service
+<div class="container my-4">
     <br />
     <div style="margin-right:15px;margin-left:15px;">
         <h3>Latest Products</h3>
@@ -17,37 +18,39 @@
             <li data-target="#multi-item-example" data-slide-to="1"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            @for(int i=0;i<DB.Count;i++)
+            @for (int i = 0; i < DB.Count; i++)
             {
-                @if(i==0)
+                @if (i == 0)
                 {
                     <div class="carousel-item active">
-                    @for(int j=0;j<4;j++)
-                    {
-                        <ItemCard item="DB[j]"></ItemCard>
-                    }
+                        @for (int j = 0; j < 4; j++)
+                        {
+                            <ItemCard item="DB[j]" CallBack="ShowModal"></ItemCard>
+                        }
                     </div>
                     i += 3;
                 }
                 <div class="carousel-item">
-            @for (int j=0; j < 4 && i<DB.Count; j++)
-            {
-                <ItemCard item="DB[i]"></ItemCard>
-                i++;
-            }
+                    @for (int j = 0; j < 4 && i < DB.Count; j++)
+                    {
+                        <ItemCard item="DB[i]" CallBack="ShowModal"></ItemCard>
+                        i++;
+                    }
                 </div>
             }
         </div>
     </div>
 </div>
-<div id="myModal" class="modal fade" tabindex="-1">
+
+
+<div id="myModal" class="modal fade modal-open" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body text-center">
-                <p class="text-default">Shop Name : CarreFour</p>
-                <p class="text-default">Shop Address : Lower Mall Road l#1234</p>
-                <p class="text-default">Email Address: mallroad@gmail.com</p>
-                <p class="text-default">Contact  : +92345678996</p>
+                <p class="text-default">Shop Name : @SellerShop?.ShopName</p>
+                <p class="text-default">Shop Address : @SellerShop?.Address</p>
+                <p class="text-default">Email Address: @SellerShop?.Email</p>
+                <p class="text-default">Contact  : @SellerShop?.Contact</p>
             </div>
             <div class="modal-footer text-center">
                 <button type="button" class="btn btn-outline-secondary rounded-top waves-effect ml-auto mr-auto" data-dismiss="modal">
@@ -57,10 +60,15 @@
         </div>
     </div>
 </div>
+
+
+
+
+
 @code {
-    
-    public List<Item> DB { get; set; } = new List<Item>
-{
+
+    /*public List<Item> DB { get; set; } = new List<Item>
+    {
         new Item{ItemName="Shaper Shoes",Brand="Shaper",Image="/shoes.jpg",Price=1234,Discount=12},
         new Item{ItemName="Nike Shoes",Image="/shoes2.jpg",Price=12000,Discount=30},
         new Item{ItemName="Ladies Shoes",Image="/shoes3.jpg",Price=40000,Discount=20},
@@ -71,6 +79,16 @@
         new Item{ItemName="Gold Mine",Image="/watch3.jpg",Price=400000,Discount=30},
         new Item{ItemName="Royal",Image="/watch4.jpg",Price=5000000,Discount=35},
         new Item{ItemName="Legs Fitter",Image="/pant.jpg",Price=4000,Discount=50}
-    };
-    
+    };*/
+
+    [Parameter]
+    public List<Product> DB { get; set; } = new List<Product>();   //will be received as parameter
+
+    public Seller? SellerShop { get; set; } = null;
+
+    private void ShowModal(Seller seller)
+    {
+        SellerShop = seller;
+        //SellerShop = service.getShopDetails(sellerId);
+    }
 }

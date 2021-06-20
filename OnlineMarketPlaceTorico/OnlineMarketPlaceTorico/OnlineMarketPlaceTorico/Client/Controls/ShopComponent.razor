@@ -1,0 +1,19 @@
+﻿<div id="card-stack" class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+
+    @foreach (Seller shop in DB)
+    {
+        <ShopCard shop="@shop" Callback="fun"></ShopCard>
+    }
+
+</div>
+
+@code {
+    [Parameter]
+    public List<Seller> DB { get; set; } = new List<Seller>();
+    [Parameter]
+    public EventCallback<int> Callback { get; set; }
+    public void fun(int id)
+    {
+        Callback.InvokeAsync(id);
+    }
+}

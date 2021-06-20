@@ -1,4 +1,5 @@
 ﻿@page  "/"
+@inject ProductService service
 <div class="container my-4">
     <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -30,10 +31,14 @@
         </a>
     </div>
 </div>
-<LatestProducts>
-
+<LatestProducts DB="latestProducts">
 </LatestProducts>
 @code {
+    public List<Product> latestProducts = new List<Product>();
 
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        latestProducts = await service.GetLatestProducts();
+    }
 }
-    

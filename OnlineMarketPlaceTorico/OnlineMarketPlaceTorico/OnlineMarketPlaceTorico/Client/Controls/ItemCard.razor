@@ -1,19 +1,38 @@
-﻿
+﻿@inject ProductService service;
 <div class='col-md-3 float-left mt-2 mb-2'>
     <div class='card h-100'>
-        <img src='@item.Image' class='card-img-top img-fluid' style='width:100%;height:15vw;object-fit:cover' />
+        <img src='@item.Picture' class='card-img-top img-fluid' style='width:100%;height:15vw;object-fit:cover' />
         <div class='card-body text-center'>
-            <h5 class='card-title text-secondary'>@item.ItemName</h5>
+            <h5 class='card-title text-secondary'>@item.Name</h5>
             <p class='card-text text-default'>Brand: @item.Brand</p>
             <p class='card-text text-danger'>Price: Rs.@item.Price</p>
             <p class='card-text text-success'>Discount: @item.Discount%</p>
-            <button class='btn btn-outline-default btn-rounded-2 waves-effect' data-toggle="modal" data-target="#myModal" onclick="gtag('event', 'click', {'event_category' : 'ItemCard','event_label' : 'ShopDetails'});">
+
+            <!--I removed Gullsher's onclick and replaced mine,
+            onclick="gtag('event', 'click', {'event_category' : 'ItemCard','event_label' : 'ShopDetails'});"-->
+            
+            <button class='btn btn-outline-default btn-rounded-2 waves-effect' data-toggle="modal" data-target="#myModal" @onclick="()=>callModal(item.SellerId)">
                 <i class='fas fa-store-alt'></i>  Shop Details
             </button>
         </div>
     </div>
 </div>
+
 @code {
+
+    public Seller? sellerShop = null;
+
     [Parameter]
-    public Item item { get; set; }
+    public Product item { get; set; }
+
+    [Parameter]
+    public EventCallback<Seller> CallBack { get; set; }
+
+    public async void callModal(int? sellerId)
+    {
+        sellerShop = await service.getShopDetails(sellerId);        
+        if(sellerShop!=null)                 //I put this check to wait for response, when response will come, then I will invoke CallBack, to deliver data to modal on time, otherwise data will come later and modal will invoke earlier
+           CallBack.InvokeAsync(sellerShop);
+    }
+
 }
