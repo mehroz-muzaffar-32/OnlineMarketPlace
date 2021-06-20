@@ -1,8 +1,8 @@
 ﻿<div id="card-stack" class="row row-cols-1 row-cols-md-3 g-4 mt-4">
 
-    @foreach (Item item in DB)
+    @foreach (Product item in DB)
     {
-        <ItemCard item="@item"></ItemCard>    
+        <ItemCard item="@item" CallBack="ShowSellerDetails"></ItemCard>    
     }
 
 </div>
@@ -11,10 +11,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body text-center">
-                <p class="text-default">Shop Name : CarreFour</p>
-                <p class="text-default">Shop Address : Lower Mall Road l#1234</p>
-                <p class="text-default">Email Address: mallroad@gmail.com</p>
-                <p class="text-default">Contact  : +92345678996</p>
+                <p class="text-default">Shop Name : @seller?.ShopName</p>
+                <p class="text-default">Shop Address : @seller?.Address</p>
+                <p class="text-default">Email Address: @seller?.Email</p>
+                <p class="text-default">Contact  : @seller?.Contact</p>
                 
             </div>
             <div class="modal-footer text-center">
@@ -28,8 +28,8 @@
 
 
 @code {
-    public List<Item> DB { get; set; } = new List<Item>
-{
+    /*public List<Item> DB { get; set; } = new List<Item>
+    { 
         new Item{ItemName="Shaper Shoes",Brand="Shaper",Image="/shoes.jpg",Price=1234,Discount=12},
         new Item{ItemName="Nike Shoes",Image="/shoes2.jpg",Price=12000,Discount=30},
         new Item{ItemName="Ladies Shoes",Image="/shoes3.jpg",Price=40000,Discount=20},
@@ -40,5 +40,12 @@
         new Item{ItemName="Gold Mine",Image="/watch3.jpg",Price=400000,Discount=30},
         new Item{ItemName="Royal",Image="/watch4.jpg",Price=5000000,Discount=35},
         new Item{ItemName="Legs Fitter",Image="/pant.jpg",Price=4000,Discount=50}
-    };
+    };*/
+    [Parameter]
+    public List<Product> DB { get; set; } = new List<Product>();
+    public Seller? seller = null;
+    public void ShowSellerDetails(Seller? sellerDetails)
+    {
+        seller = sellerDetails;
+    }
 }

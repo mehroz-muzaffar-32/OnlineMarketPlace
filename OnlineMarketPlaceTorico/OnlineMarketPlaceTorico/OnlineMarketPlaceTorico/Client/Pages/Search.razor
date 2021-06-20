@@ -1,33 +1,35 @@
 ﻿@page "/Search"
+@page "/Search/{NavBarStringArrive}"     
+@page "/Search/{CategoryArrive}/{NavbarStringArrive}"
+@inject ProductService service
 <div class="container-fluid row">
     <div class="container-fluid col-3 float-left bg-secondary text-white z-depth-1-half ">
         <br />
         <span class="text-capitalize text-white" style="font-size:18px;"><i class="fas fa-filter"></i>&nbsp;&nbsp;FILTERS</span>
         <hr />
         <div>
-            <input type="text" id="typesearch2" class="form-control" style="height:30px;max-width:inherit;" placeholder="Search" />
+            <input type="text" id="typesearch2" class="form-control" style="height:30px;max-width:inherit;" placeholder="Search" @bind-value="SearchFilter" />
         </div>
         <hr />
         <div class="form-check">
             <input class="form-check-input"
                    type="radio"
                    name="flexRadioDefault1"
-                   id="flexRadioDefault1" />
+                   id="flexRadioDefault1" @onclick='()=>SearchMode="shop"' />
             <label class="form-check-label" for="flexRadioDefault1">  Search Shop </label>
         </div>
         <div class="form-check">
             <input class="form-check-input"
                    type="radio"
                    name="flexRadioDefault1"
-                   id="flexRadioDefault2" />
+                   id="flexRadioDefault2" @onclick='()=>SearchMode="product"'/>
             <label class="form-check-label" for="flexRadioDefault2"> Search Product </label>
         </div>
         <hr />
         <div class="form-check">
             <input class="form-check-input"
                    type="checkbox"
-                   value=""
-                   id="flexCheckDefault1" />
+                   id="flexCheckDefault1"  @onclick='()=>SearchByBrandName=!SearchByBrandName' />
             <label class="form-check-label" for="flexCheckDefault">
                 Search By Brand Name
             </label>
@@ -35,8 +37,7 @@
         <div class="form-check">
             <input class="form-check-input"
                    type="checkbox"
-                   value=""
-                   id="flexCheckDefault2" />
+                   id="flexCheckDefault2" @onclick='()=>SearchByShopName=!SearchByShopName' />
             <label class="form-check-label" for="flexCheckDefault">
                 Search By Shop Name
             </label>
@@ -44,8 +45,7 @@
         <div class="form-check">
             <input class="form-check-input"
                    type="checkbox"
-                   value=""
-                   id="flexCheckDefault3" />
+                   id="flexCheckDefault3" @onclick='()=>SearchByProductName=!SearchByProductName' />
             <label class="form-check-label" for="flexCheckDefault">
                 Search By Product Name
             </label>
@@ -66,26 +66,135 @@
             <input class="form-check-input"
                    type="radio"
                    name="flexRadioDefault"
-                   id="flexRadioDefault1" />
+                   id="flexRadioDefault1" @onclick='()=>AscendOrder=true' />
             <label class="form-check-label" for="flexRadioDefault1">  Order By Price (Ascending) </label>
         </div>
         <div class="form-check">
             <input class="form-check-input"
                    type="radio"
                    name="flexRadioDefault"
-                   id="flexRadioDefault2" />
+                   id="flexRadioDefault2" @onclick='()=>AscendOrder=false' />
             <label class="form-check-label" for="flexRadioDefault2"> Order By Price (Descending) </label>
         </div>
         <hr />
-        <button class="btn btn-success btn-md waves-effect" type="submit" onclick="gtag('event', 'click', {'event_category' : 'Search','event_label' : 'Search'});"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</button>
+        <!--I removed, type="submit" ,  onclick="gtag('event', 'click', {'event_category' : 'Search','event_label' : 'Search'});"-->
+        <button class="btn btn-success btn-md waves-effect" @onclick="flexibleSearch"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</button>
         <br />
     </div>
+
     <div class="container-fluid col-9 float-left align-content-center">
-        <ItemComponent></ItemComponent>
+        @if((products==null || products.Capacity==0) && (shops==null || shops.Capacity==0))
+        {
+            <h3 class="text-center text-dark mt-4">No Results Found<br>Retry</h3>
+        }
+        <ItemComponent DB="products"></ItemComponent>
+        <ShopComponent DB="shops" Callback="ShowProducts"></ShopComponent>
     </div>
+
+    @foreach (Product pro in products)
+    {
+        <h1>@pro.Name</h1>
+    }
+    <h1>@CategoryArrive and @NavbarStringArrive</h1>
+    @if (CategoryArrive == null)
+    {
+        <h1>Catogary is null</h1>
+    }
+    @if (NavbarStringArrive == null)
+    {
+        <h1>search string is null</h1>
+    }
+
+    <br /><br />
+    <h1>Search Filter: @SearchFilter</h1>
+    <h1>SearchMode:  @SearchMode</h1>
+    <h1>ProductName: @SearchByProductName</h1>
+    <h1>BrandName: @SearchByBrandName</h1>
+    <h1>ShopName: @SearchByShopName</h1>
+    <h1>MinNum: @minNumber</h1>
+    <h1>MaxNum: @maxNumber</h1>
+    <h1>Asecnd: @AscendOrder</h1>
+    
 </div>
+
+
+
+
+
+
 @code {
     public int minNumber { get; set; } = 0;
     public int maxNumber { get; set; } = 0;
+    public string? SearchFilter { get; set; } = null;
+    public string? SearchMode { get; set; } = null;
+    public bool SearchByBrandName { get; set; } = false;
+    public bool SearchByProductName { get; set; } = false;
+    public bool SearchByShopName { get; set; } = false;
+    public bool AscendOrder { get; set; } = true;
 
+    public bool invalidSearch { get; set; } = true;
+    [Parameter]
+    public string? CategoryArrive { get; set; } = null;     //by-default null 
+    [Parameter]
+    public string? NavbarStringArrive { get; set; } = null;  //by-default null
+    public List<Product> products = new List<Product>();
+    public List<Seller> shops = new List<Seller>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        //products = await service.GetLatestProducts();
+
+        if (NavbarStringArrive != null || CategoryArrive != null)
+            products = await service.GetNavSearchedProducts(NavbarStringArrive, CategoryArrive);
+        //fetch all data from
+    }
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        Console.WriteLine("In Parent:"  +CategoryArrive + "     " + NavbarStringArrive);    //yeah values are assigning to parameters automatically
+        if (NavbarStringArrive != null || CategoryArrive != null)
+            products = await service.GetNavSearchedProducts(NavbarStringArrive, CategoryArrive);
+        StateHasChanged();
+    }
+    public async void ShowProducts(int sellerId)
+    {
+        products = await service.GetShopProducts(sellerId);
+        shops = new List<Seller>(); //make it null, so that shops will not display
+        StateHasChanged();
+    }
+    public async void flexibleSearch()
+    {
+
+        if (SearchFilter != null)     //if user will give some string then we will search otherwise not
+        {
+            if (SearchMode == "shop")
+            {
+                shops = await service.GetRelatedShops(SearchFilter);
+                products = new List<Product>();
+                StateHasChanged();    //this statement will update the page
+            }
+            else       //if user select product or no checkbox is clicked, we will search product(by-default)
+            {
+                products = await service.GetFlexibleSearchedProducts(SearchFilter,SearchByBrandName,SearchByProductName,SearchByShopName, minNumber, maxNumber, AscendOrder);
+                shops = new List<Seller>();
+                StateHasChanged();    //this statement will update the page
+            }
+        }
+    }
+    public async void CallMe()
+    {
+        if (NavbarStringArrive != null || CategoryArrive != null)
+            products = await service.GetNavSearchedProducts(NavbarStringArrive, CategoryArrive);
+        /*
+        @if (NavbarStringArrive == null && CategoryArrive == null)
+        {
+            <h3 class="text-danger p-3 text-center">Nothing matched, Kindly use search bar and filters for flexible search.<br /> Thanks!</h3>
+        }
+        else if(products.Capacity==0)
+        {
+            <h3 class="text-danger p-3 text-center">No Results Found.<br /> Thanks for Visiting!</h3>
+        }
+        */
+    }
 }
