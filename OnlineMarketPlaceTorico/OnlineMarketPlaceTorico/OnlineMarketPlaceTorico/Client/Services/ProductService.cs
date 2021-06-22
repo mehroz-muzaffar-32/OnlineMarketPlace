@@ -50,6 +50,10 @@ namespace OnlineMarketPlaceTorico.Client.Services
         {
             return await this.httpClient.GetFromJsonAsync<Seller>($"https://localhost:44390/api/online/getSeller/{sellerEmail}");
         }
+        public async Task UpdateSeller(int sellerId, Seller updatedSeller)
+        {
+            await this.httpClient.PutAsJsonAsync($"https://localhost:44390/api/online/updateSeller/{sellerId}",updatedSeller);
+        }
         public async Task<List<Product>> GetProductsListOfSeller(int sellerId)
         {
             return await this.httpClient.GetFromJsonAsync<List<Product>>($"https://localhost:44390/api/online/getShopProducts/{sellerId}");

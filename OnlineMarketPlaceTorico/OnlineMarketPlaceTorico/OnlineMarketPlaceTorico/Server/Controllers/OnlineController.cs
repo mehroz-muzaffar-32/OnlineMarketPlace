@@ -281,6 +281,26 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
         {
             return database.Seller.Where(s => s.Email == sellerEmail).FirstOrDefault();
         }
+        [HttpPut]
+        [Route("updateSeller/{sellerId}")]
+        public bool UpdateSeller(int sellerId, Seller UpdatedSeller)
+        {
+            Seller? sel = database.Seller.Where(s => s.Id == sellerId).FirstOrDefault();
+            if (sel == null)
+                return false;
+            if (UpdatedSeller.Address != null && UpdatedSeller.Address != "")
+                sel.Address = UpdatedSeller.Address;
+            if (UpdatedSeller.Contact != null && UpdatedSeller.Contact != "")
+                sel.Contact = UpdatedSeller.Contact;
+            if (UpdatedSeller.Email != null && UpdatedSeller.Email != "")
+                sel.Email = UpdatedSeller.Email;
+            if (UpdatedSeller.Password != null && UpdatedSeller.Password != "" && UpdatedSeller.Password.Length>=8)
+                sel.Password = UpdatedSeller.Password;
+            if (UpdatedSeller.ShopName != null && UpdatedSeller.ShopName != "")
+                sel.ShopName = UpdatedSeller.ShopName;
+            database.SaveChanges();
+            return true;
+        }
         [HttpGet]
         [Route("getSellerId/{sellerEmail}")]
         public int GetSellerId(string sellerEmail)

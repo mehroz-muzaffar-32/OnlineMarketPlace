@@ -1,4 +1,7 @@
 ﻿@page "/spc"
+@inject ProductService service
+@inject IJSRuntime JS
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <br />
 <AuthorizeView>
     <div class="container-fluid row">
@@ -9,28 +12,34 @@
             <hr />
             <div>
                 <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Shop Name:</label>
-                        <div class="col-md-8">
-                            <input class="form-control" type="text" name="shopName" value="">
+                    @if (sellerDetails != null)
+                    {
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Shop Name:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="shopName" @bind-value="sellerDetails.ShopName">
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Email:</label>
                         <div class="col-lg-8">
                             <input class="form-control" type="email" name="email" value="@context.User.Identity.Name" readonly>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Address:</label>
-                        <div class="col-md-8">
-                            <input class="form-control" type="text" name="address" value="">
+                    @if (sellerDetails != null)
+                    {
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Address:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="address" @bind-value="sellerDetails.Address">
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-8">
-                            <input type="submit" onclick="gtag('event', 'click', {'event_category' : 'Signup','event_label' : 'Signup'});" class="btn btn-purple waves-effect" value="Save Changes">
+                            <input type="button" @onclick="UpdateSeller" class="btn btn-purple waves-effect" value="Save Changes">
                         </div>
                     </div>
                 </form>
@@ -44,7 +53,16 @@
 </AuthorizeView>
 
 
-
-    @code {
-
+@code {
+    Seller sellerDetails = null;
+    protected override async Task OnParametersSetAsync()
+    {
+        AuthenticationState authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        sellerDetails = await service.GetSeller(authState.User.Identity.Name);
     }
+    async Task UpdateSeller()
+    {
+        await JS.InvokeVoidAsync("gtag", "event", "click", new { event_category = "Signup", event_label = "Signup" });
+        await service.UpdateSeller(sellerDetails.Id, sellerDetails);
+    }
+}
