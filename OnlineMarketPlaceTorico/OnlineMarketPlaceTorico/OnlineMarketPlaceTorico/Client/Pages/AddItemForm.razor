@@ -3,6 +3,7 @@
 @inject IJSRuntime JS
 @inject HttpClient Http
 @inject ProductService service
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <h4 class="text-center mt-4">Please Enter Product Details Below:</h4>
 <form class="text-left" id="addform">
     <table class="m-auto w-50">
@@ -19,7 +20,7 @@
                 <label class="col-form-label" for="Price">Product Price: </label>
             </td>
             <td>
-                <input class="form-control" @bind-value="value.Price" type="number" name="Price" id="Price" min="0"/>
+                <input class="form-control" @bind-value="value.Price" type="number" name="Price" id="Price" min="0" />
             </td>
         </tr>
         <tr>
@@ -27,7 +28,7 @@
                 <label class="col-form-label" for="Discount">Product Discount: </label>
             </td>
             <td>
-                <input class="form-control" @bind-value="value.Discount" type="number" name="Discount" id="Discount" min="0" max="100"/>
+                <input class="form-control" @bind-value="value.Discount" type="number" name="Discount" id="Discount" min="0" max="100" />
             </td>
         </tr>
         <tr>
@@ -76,14 +77,37 @@
 @code {
     static Random rand = new Random();
     string ErrorMessage = "";
-    Product value = new Product { SellerId=ItemsRepository.CurrentSellerId,CreationDate=DateTime.Now,Picture=ItemsRepository.Pictures.ElementAt(rand.Next(0,Pictures.Count()))};
+    private string sellerEmail;
+    Product value = new Product { SellerId = CurrentSellerId, CreationDate = DateTime.Now, Picture = Pictures.ElementAt(rand.Next(0, Pictures.Count())) };
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        await SetSellerEmail();
+        if (CurrentSellerId == -1)
+        {
+            CurrentSellerId = await service.GetSellerId(sellerEmail);
+        }
+        if (Categories == null)
+        {
+            Categories = await service.GetCategoriesList();
+        }
+    }
+
+    private async Task SetSellerEmail()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        sellerEmail = user.FindFirst(c => c.Type == "preferred_username")?.Value;
+    }
+
     async Task SubmitForm()
     {
-        if (value.Name==null || value.Name=="")
+        if (value.Name == null || value.Name == "")
         {
             ErrorMessage = "Product Name Cannot Be Empty";
         }
-        else if(value.Price==null)
+        else if (value.Price == null)
         {
             ErrorMessage = "Product Price Cannot Be Empty";
         }
@@ -95,7 +119,7 @@
         {
             ErrorMessage = "Product Discount Cannot Be Empty";
         }
-        else if (value.Discount <0 || value.Discount >100)
+        else if (value.Discount < 0 || value.Discount > 100)
         {
             ErrorMessage = "Product Discount Must Be Between 0 to 100";
         }
@@ -103,7 +127,7 @@
         {
             ErrorMessage = "Product Quantity Cannot Be Empty";
         }
-        else if (value.Quantity <0)
+        else if (value.Quantity < 0)
         {
             ErrorMessage = "Product Quantity Must be greater than 0";
         }
@@ -118,7 +142,7 @@
         else
         {
             await Http.PostAsJsonAsync("https://localhost:44390/api/online/add", value);
-            ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
+            ItemsList = await service.GetProductsListOfSeller(CurrentSellerId);
             await JS.InvokeVoidAsync("gtagH");
             manager.NavigateTo("/SellerItems");
         }

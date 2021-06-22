@@ -2,6 +2,7 @@
 @inject NavigationManager manager
 @inject HttpClient Http
 @inject ProductService service
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <!--TODO look at these red lines/errors, code works correctly but somehow it shows errors.  -->
 <h4 class="text-center mt-4">Please Change Following Details (if any):</h4>
 <form action="/SellerItems" class="text-left" method="get" runat="server" EncType="multipart/form-data">
@@ -20,7 +21,7 @@
                 <label class="col-form-label" for="Price">Product Price: </label>
             </td>
             <td>
-                <input class="form-control" type="number" @bind-value="value.Price" name="Price" id="Price" min="0"/>
+                <input class="form-control" type="number" @bind-value="value.Price" name="Price" id="Price" min="0" />
             </td>
         </tr>
         <tr>
@@ -79,11 +80,32 @@
     public int ProductId { get; set; }
     Product value;
     string ErrorMessage = "";
+    private string sellerEmail;
 
     protected override async Task OnParametersSetAsync()
     {
         await base.OnParametersSetAsync();
-        value = ItemsRepository.ItemsList.Find(prod => prod.Id == ProductId);
+        await SetSellerEmail();
+        if (CurrentSellerId == -1)
+        {
+            CurrentSellerId = await service.GetSellerId(sellerEmail);
+        }
+        if (ItemsList == null)
+        {
+            ItemsList = await service.GetProductsListOfSeller(CurrentSellerId);
+        }
+        if (Categories == null)
+        {
+            Categories = await service.GetCategoriesList();
+        }
+        value = ItemsList.Find(prod => prod.Id == ProductId);
+    }
+
+    private async Task SetSellerEmail()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        sellerEmail = user.FindFirst(c => c.Type == "preferred_username")?.Value;
     }
 
     async Task SubmitForm()
@@ -127,7 +149,7 @@
         else
         {
             await Http.PutAsJsonAsync($"https://localhost:44390/api/online/update/{value.Id}", value);
-            ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
+            ItemsList = await service.GetProductsListOfSeller(CurrentSellerId);
             manager.NavigateTo("/SellerItems");
         }
     }

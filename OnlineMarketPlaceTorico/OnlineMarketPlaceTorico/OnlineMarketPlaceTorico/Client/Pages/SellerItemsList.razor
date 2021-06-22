@@ -33,11 +33,11 @@ else if (Layout == "Grid")
 }
 
 @code {
-    string Layout { get; set; } = ItemsRepository.View;
+    string Layout { get; set; } = View;
     void SetLayout(string value)
     {
         Layout = value;
-        ItemsRepository.View = value;
+        View = value;
     }
     private string sellerEmail;
 
@@ -45,9 +45,18 @@ else if (Layout == "Grid")
     {
         await base.OnParametersSetAsync();
         await SetSellerEmail();
-        ItemsRepository.CurrentSellerId = await service.GetSellerId(sellerEmail);
-        ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
-        ItemsRepository.Categories = await service.GetCategoriesList();
+        if(CurrentSellerId==-1)
+        {
+            CurrentSellerId = await service.GetSellerId(sellerEmail);
+        }
+        if(ItemsList==null)
+        {
+            ItemsList = await service.GetProductsListOfSeller(CurrentSellerId);
+        }
+        if (Categories == null)
+        {
+            Categories = await service.GetCategoriesList();
+        }
     }
 
     private async Task SetSellerEmail()
