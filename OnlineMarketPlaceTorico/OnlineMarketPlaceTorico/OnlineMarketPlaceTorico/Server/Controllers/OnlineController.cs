@@ -276,6 +276,12 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
             }
         }
         [HttpGet]
+        [Route("getSeller/{sellerEmail}")]
+        public Seller GetSeller(string sellerEmail)
+        {
+            return database.Seller.Where(s => s.Email == sellerEmail).FirstOrDefault();
+        }
+        [HttpGet]
         [Route("getSellerId/{sellerEmail}")]
         public int GetSellerId(string sellerEmail)
         {

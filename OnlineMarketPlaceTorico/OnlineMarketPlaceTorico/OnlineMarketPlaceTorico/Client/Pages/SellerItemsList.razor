@@ -6,37 +6,38 @@
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject ProductService service
-
-<div class="ml-4 mt-4">
-    <a class="btn btn-success" href="/AddItem">Add Product</a>
-    <button class="btn btn-dark" @onclick="@(e=>SetLayout("List"))">List View</button>
-    <button class="btn btn-dark" @onclick="@(e=>SetLayout("Grid"))">Grid View</button>
-</div>
-
-@if (Layout == "List")
-{
-    <div class="list-group">
-        @if (ItemsList != null)
-        {
-            @foreach (Product item in ItemsList)
-            {
-                <ListItem ListItemValue=@item StateUpdated=@StateHasChanged></ListItem>
-            }
-        }
+<AuthorizeView>
+    <div class="ml-4 mt-4">
+        <a class="btn btn-success" href="/AddItem">Add Product</a>
+        <button class="btn btn-dark" @onclick="@(e=>SetLayout("List"))">List View</button>
+        <button class="btn btn-dark" @onclick="@(e=>SetLayout("Grid"))">Grid View</button>
     </div>
-}
-else if (Layout == "Grid")
-{
-    <div class="container-fluid float-left align-content-center">
-        @if (ItemsList != null)
-        {
-            @foreach (Product item in ItemsList)
+
+    @if (Layout == "List")
+    {
+        <div class="list-group">
+            @if (ItemsList != null)
             {
-                <GridItem GridItemValue=@item StateUpdated=@StateHasChanged></GridItem>
+                @foreach (Product item in ItemsList)
+                {
+                    <ListItem ListItemValue=@item StateUpdated=@StateHasChanged></ListItem>
+                }
             }
-        }
-    </div>
-}
+        </div>
+    }
+    else if (Layout == "Grid")
+    {
+        <div class="container-fluid float-left align-content-center">
+            @if (ItemsList != null)
+            {
+                @foreach (Product item in ItemsList)
+                {
+                    <GridItem GridItemValue=@item StateUpdated=@StateHasChanged></GridItem>
+                }
+            }
+        </div>
+    }
+</AuthorizeView>
 
 @code {
     string Layout { get; set; } = View;
