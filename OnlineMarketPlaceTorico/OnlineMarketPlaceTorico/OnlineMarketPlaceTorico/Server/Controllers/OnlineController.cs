@@ -18,9 +18,10 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
             database = new OnlineMarketPlace_DBContext();
         }
         [HttpGet]
-        public List<Category> GetAll()
+        [Route("getAllShops")]
+        public List<Seller> GetAllShops()
         {
-            return database.Category.ToList(); 
+            return database.Seller.ToList(); 
         }
 
         //Used in homepage

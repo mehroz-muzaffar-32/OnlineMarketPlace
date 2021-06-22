@@ -6,6 +6,8 @@
     <div class="container-fluid col-3 float-left bg-secondary text-white z-depth-1-half ">
         <br />
         <span class="text-capitalize text-white" style="font-size:18px;"><i class="fas fa-filter"></i>&nbsp;&nbsp;FILTERS</span>
+        <br/>
+        <div class="btn btn-outline-warning waves-effect" @onclick="AllShops">All Shops</div>
         <hr />
         <div>
             <input type="text" id="typesearch2" class="form-control" style="height:30px;max-width:inherit;" placeholder="Search" @bind-value="SearchFilter" />
@@ -90,30 +92,6 @@
         <ItemComponent DB="products"></ItemComponent>
         <ShopComponent DB="shops" Callback="ShowProducts"></ShopComponent>
     </div>
-
-    @foreach (Product pro in products)
-    {
-        <h1>@pro.Name</h1>
-    }
-    <h1>@CategoryArrive and @NavbarStringArrive</h1>
-    @if (CategoryArrive == null)
-    {
-        <h1>Catogary is null</h1>
-    }
-    @if (NavbarStringArrive == null)
-    {
-        <h1>search string is null</h1>
-    }
-
-    <br /><br />
-    <h1>Search Filter: @SearchFilter</h1>
-    <h1>SearchMode:  @SearchMode</h1>
-    <h1>ProductName: @SearchByProductName</h1>
-    <h1>BrandName: @SearchByBrandName</h1>
-    <h1>ShopName: @SearchByShopName</h1>
-    <h1>MinNum: @minNumber</h1>
-    <h1>MaxNum: @maxNumber</h1>
-    <h1>Asecnd: @AscendOrder</h1>
     
 </div>
 
@@ -155,6 +133,7 @@
         Console.WriteLine("In Parent:"  +CategoryArrive + "     " + NavbarStringArrive);    //yeah values are assigning to parameters automatically
         if (NavbarStringArrive != null || CategoryArrive != null)
             products = await service.GetNavSearchedProducts(NavbarStringArrive, CategoryArrive);
+        shops = new List<Seller>();
         StateHasChanged();
     }
     public async void ShowProducts(int sellerId)
@@ -182,19 +161,15 @@
             }
         }
     }
+    public async void AllShops()
+    {
+        shops = await service.GetAllShops();
+        products = new List<Product>();
+        StateHasChanged();
+    }
     public async void CallMe()
     {
         if (NavbarStringArrive != null || CategoryArrive != null)
             products = await service.GetNavSearchedProducts(NavbarStringArrive, CategoryArrive);
-        /*
-        @if (NavbarStringArrive == null && CategoryArrive == null)
-        {
-            <h3 class="text-danger p-3 text-center">Nothing matched, Kindly use search bar and filters for flexible search.<br /> Thanks!</h3>
-        }
-        else if(products.Capacity==0)
-        {
-            <h3 class="text-danger p-3 text-center">No Results Found.<br /> Thanks for Visiting!</h3>
-        }
-        */
     }
 }

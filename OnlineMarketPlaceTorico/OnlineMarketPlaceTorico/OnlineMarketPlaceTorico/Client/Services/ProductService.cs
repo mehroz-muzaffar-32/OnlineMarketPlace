@@ -42,5 +42,9 @@ namespace OnlineMarketPlaceTorico.Client.Services
         {
             return await this.httpClient.GetFromJsonAsync<List<Seller>>("https://localhost:44390/api/online/getShops/" + searchString);
         }
+        public async Task<List<Seller>> GetAllShops()
+        {
+            return await this.httpClient.GetFromJsonAsync<List<Seller>>("https://localhost:44390/api/online/getAllShops");
+        }
     }
 }
