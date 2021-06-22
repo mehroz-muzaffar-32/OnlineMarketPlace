@@ -16,18 +16,24 @@
 @if (Layout == "List")
 {
     <div class="list-group">
-        @foreach (Product item in ItemsRepository.ItemsList)
+        @if (ItemsList != null)
         {
-            <ListItem ListItemValue=@item StateUpdated=@StateHasChanged></ListItem>
+            @foreach (Product item in ItemsList)
+            {
+                <ListItem ListItemValue=@item StateUpdated=@StateHasChanged></ListItem>
+            }
         }
     </div>
 }
 else if (Layout == "Grid")
 {
     <div class="container-fluid float-left align-content-center">
-        @foreach (Product item in ItemsRepository.ItemsList)
+        @if (ItemsList != null)
         {
-            <GridItem GridItemValue=@item StateUpdated=@StateHasChanged></GridItem>
+            @foreach (Product item in ItemsList)
+            {
+                <GridItem GridItemValue=@item StateUpdated=@StateHasChanged></GridItem>
+            }
         }
     </div>
 }
@@ -43,7 +49,6 @@ else if (Layout == "Grid")
 
     protected override async Task OnParametersSetAsync()
     {
-        await base.OnParametersSetAsync();
         await SetSellerEmail();
         if(CurrentSellerId==-1)
         {
@@ -63,7 +68,13 @@ else if (Layout == "Grid")
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        sellerEmail = user.FindFirst(c => c.Type == "preferred_username")?.Value;
+        try
+        {
+            sellerEmail = user.FindFirst(c => c.Type == "preferred_username")?.Value;
+        }catch(Exception exp)
+        {
+            Console.WriteLine(exp.Message);
+        }
     }
     //Seller seller;
     //int 

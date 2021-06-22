@@ -7,73 +7,79 @@
 <h4 class="text-center mt-4">Please Change Following Details (if any):</h4>
 <form action="/SellerItems" class="text-left" method="get" runat="server" EncType="multipart/form-data">
     <input type="hidden" asp-for="Type" value="Regular" />
-    <table class="m-auto w-50">
-        <tr>
-            <td>
-                <label class="col-form-label" for="Name">Product Name: </label>
-            </td>
-            <td>
-                <input class="form-control" @bind-value="value.Name" name="Name" id="Name" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label class="col-form-label" for="Price">Product Price: </label>
-            </td>
-            <td>
-                <input class="form-control" type="number" @bind-value="value.Price" name="Price" id="Price" min="0" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label class="col-form-label" for="Discount">Product Discount: </label>
-            </td>
-            <td>
-                <input class="form-control" @bind-value="value.Discount" type="number" name="Discount" id="Discount" min="0" max="100" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label class="col-form-label" for="Quantity">Product Quantity: </label>
-            </td>
-            <td>
-                <input class="form-control" type="number" @bind-value="value.Quantity" name="Quantity" id="Quantity" min="0" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label class="col-form-label" for="Brand">Product Brand: </label>
-            </td>
-            <td>
-                <input class="form-control" @bind-value="value.Brand" name="Brand" id="Brand" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label class="col-form-label" for="Category">Product Category: </label>
-            </td>
-            <td>
-                <select id="Category" name="Category" class="custom-select" form="addform" @bind-value="value.CategoryId" @bind-value:event="onchange">
-                    <option>Select Category</option>
-                    @foreach (Category cat in ItemsRepository.Categories)
-                    {
-                        <option value=@cat.Id>@cat.Name</option>
-                    }
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" class="text-center">
-                <p class="validation-message">@ErrorMessage</p>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" class="text-right">
-                <input class="btn btn-purple" type="button" value="Apply Changes" @onclick="SubmitForm" />
-            </td>
-        </tr>
-    </table>
-</form>
+    @if (value != null)
+    {
+        <table class="m-auto w-50">
+            <tr>
+                <td>
+                    <label class="col-form-label" for="Name">Product Name: </label>
+                </td>
+                <td>
+                    <input class="form-control" @bind-value="value.Name" name="Name" id="Name" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="col-form-label" for="Price">Product Price: </label>
+                </td>
+                <td>
+                    <input class="form-control" type="number" @bind-value="value.Price" name="Price" id="Price" min="0" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="col-form-label" for="Discount">Product Discount: </label>
+                </td>
+                <td>
+                    <input class="form-control" @bind-value="value.Discount" type="number" name="Discount" id="Discount" min="0" max="100" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="col-form-label" for="Quantity">Product Quantity: </label>
+                </td>
+                <td>
+                    <input class="form-control" type="number" @bind-value="value.Quantity" name="Quantity" id="Quantity" min="0" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="col-form-label" for="Brand">Product Brand: </label>
+                </td>
+                <td>
+                    <input class="form-control" @bind-value="value.Brand" name="Brand" id="Brand" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="col-form-label" for="Category">Product Category: </label>
+                </td>
+                <td>
+                    <select id="Category" name="Category" class="custom-select" form="addform" @bind-value="value.CategoryId" @bind-value:event="onchange">
+                        <option>Select Category</option>
+                        @if (Categories != null)
+                        {
+                            @foreach (Category cat in ItemsRepository.Categories)
+                            {
+                                <option value=@cat.Id>@cat.Name</option>
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <p class="validation-message">@ErrorMessage</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-right">
+                    <input class="btn btn-purple" type="button" value="Apply Changes" @onclick="SubmitForm" />
+                </td>
+            </tr>
+        </table>
+    }
+    </form>
 
 @code {
     [Parameter]
@@ -84,7 +90,6 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        await base.OnParametersSetAsync();
         await SetSellerEmail();
         if (CurrentSellerId == -1)
         {
@@ -105,7 +110,14 @@
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
-        sellerEmail = user.FindFirst(c => c.Type == "preferred_username")?.Value;
+        try
+        {
+            sellerEmail = user.FindFirst(c => c.Type == "preferred_username")?.Value;
+        }
+        catch (Exception exp)
+        {
+            Console.WriteLine(exp.Message);
+        }
     }
 
     async Task SubmitForm()
