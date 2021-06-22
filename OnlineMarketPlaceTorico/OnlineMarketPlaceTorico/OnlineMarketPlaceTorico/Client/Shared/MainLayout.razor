@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject IJSRuntime JS
+@inject ProductService service
 <div style="width:100%">
     <div class="sticky-top">
         <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
@@ -14,7 +15,7 @@
                 <span style="display:contents">
                     <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" @bind-value="NavbarString" />
                     <!-- onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Search'});"-->
-                    <a href="/search/@Category/@SearchString" class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();" @onclick="CallMe">
+                    <a href='/search/@Category/@SearchString' class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();" @onclick="CallMe">
                         <i class="fas fa-search"></i><span class=" text-set"></span>
                     </a>
                 </span>
@@ -32,64 +33,80 @@
                                 <i class="fas fa-list"></i>&nbsp;&nbsp;Categories
                             </button>
                             <div id="category" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @foreach (Category category in AllCategories)
+                                {
+                                    <a class="dropdown-item" data-value="men" @onclick='()=>Category=category.Name'>@category.Name</a>
+                                }
                                 <!--I removed this tag => gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Mens Appearal'});-->
-                                <a class="dropdown-item"  data-value="men" @onclick='()=>Category="men"'>Men's Appearal</a>
+                                <!--<a class="dropdown-item"  data-value="men" @onclick='()=>Category="men"'>Men's Appearal</a>-->
                                 <!--I removed this tag => gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Womens Appearal'});-->
-                                <a class="dropdown-item"  data-value="children" @onclick='()=>Category="children"'>Children's Appearal</a>
+                                <!--<a class="dropdown-item"  data-value="children" @onclick='()=>Category="children"'>Children's Appearal</a>-->
                                 <!--I removed this tag => gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Childrens Appearal'});-->
-                                <a class="dropdown-item"  data-value="women" @onclick='()=>Category="woman"'>Women's Appearal</a>
+                                <!--<a class="dropdown-item" data-value="women" @onclick='()=>Category="woman"'>Women's Appearal</a>-->
                             </div>
-                        </div>
-                    </li>
-                    <AuthorizeView>
-                        <li class="nav-item">
-                            <a class="btn btn-purple waves-effect" href="/spc">
-                                <i class="fas fa-user" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Profile'});"></i>&nbsp;&nbsp;View Personal Info
-                            </a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a href="/SellerItems" class="btn btn-purple btn-rounded btn-floating waves-effect" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Added Items'});">
-                                <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Added Items
-                            </a>
-                        </li>
-                    </AuthorizeView>
-                </ul>
-                <ul class="navbar-nav ">
-                    <AuthorizeView>
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-danger mr-auto waves-effect" @onclick="clickFun">
-                                <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
-                            </button>
-                        </li>
-                     </AuthorizeView>
-                </ul>
-            </div>
-        </nav>
+                        <AuthorizeView>
+                            <li class="nav-item">
+                                <a class="btn btn-purple waves-effect" href="/spc">
+                                    <i class="fas fa-user" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Profile'});"></i>&nbsp;&nbsp;View Personal Info
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/SellerItems" class="btn btn-purple btn-rounded btn-floating waves-effect" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Added Items'});">
+                                    <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Added Items
+                                </a>
+                            </li>
+                        </AuthorizeView>
+                    </ul>
+                    <ul class="navbar-nav ">
+                        <AuthorizeView>
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-danger mr-auto waves-effect" @onclick="clickFun">
+                                    <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
+                                </button>
+                            </li>
+                         </AuthorizeView>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div>
+            @Body
+        </div>
+        <div class="container-fluid" style="text-align:center;color:gray;">
+            <span style="font-size:12px">Created By BSEF18M004-Mehroz Muzaffar, BSEF18M007-Gull Sher Khan, BSEF18M023-Faizan Muhammad, BSEF18M043-Faraz Ali, BSEF18M046-Ahsen Mehmoord</span>
+        </div>
     </div>
-    <div>
-        @Body
-    </div>
-    <div class="container-fluid" style="text-align:center;color:gray;">
-        <span style="font-size:12px">Created By BSEF18M004-Mehroz Muzaffar, BSEF18M007-Gull Sher Khan, BSEF18M023-Faizan Muhammad, BSEF18M043-Faraz Ali, BSEF18M046-Ahsen Mehmoord</span>
-    </div>
-</div>
-@code{
+    @code{
 
 
-    private string? NavbarString { get; set; } = null;
-    private string? Category { get; set; } = null;
-    private string? SearchString { get; set; }
-    private LoginDisplay ld;
-    async Task clickFun()
-    {
+        private string? NavbarString { get; set; } = null;
+        private string? Category { get; set; } = null;
+        private string? SearchString { get; set; }
+        private List<Category> AllCategories { get; set; } = new List<Category>();
+        private LoginDisplay ld;
+        async Task clickFun()
+        {
 
-        await JS.InvokeVoidAsync("gtagH");
-        await ld.BeginSignOut();
+            await JS.InvokeVoidAsync("gtagH");
+            await ld.BeginSignOut();
+        }
+
+
+        private void CallMe()
+        {
+            if (NavbarString == null || NavbarString == "")
+                NavbarString = "none";       //initialize it with empty string rather than null
+            if (Category == null)
+                Category = "none";          //initialize it with empty string rather than null
+            SearchString = NavbarString;
+            NavbarString = "";
+        }
+
+        protected async override Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+            AllCategories = await service.GetCategoriesList();
+        }
     }
-
-    private void CallMe()
-    {
-        SearchString = NavbarString;
-        NavbarString = "";
-    }
-}
