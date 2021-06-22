@@ -260,12 +260,11 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
             }
         }
         [HttpPost]
-        [Route("addNewSeller/{newSellerJSON}")]
-        public bool AddNewSeller(string newSellerJSON)
+        [Route("addNewSeller")]
+        public bool AddNewSeller(Seller newSeller)
         {
             try
             {
-                Seller newSeller = System.Text.Json.JsonSerializer.Deserialize<Seller>(newSellerJSON);
                 database.Seller.Add(newSeller);
                 database.SaveChanges();
                 return true;
@@ -286,7 +285,7 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
         public bool UpdateSeller(int sellerId, Seller UpdatedSeller)
         {
             Seller? sel = database.Seller.Where(s => s.Id == sellerId).FirstOrDefault();
-            if (sel == null)
+            if (sel == null || UpdatedSeller==null)
                 return false;
             if (UpdatedSeller.Address != null && UpdatedSeller.Address != "")
                 sel.Address = UpdatedSeller.Address;
@@ -306,10 +305,10 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
             return database.Seller.Where(s => s.Email == sellerEmail).FirstOrDefault().Id;
         }
         [HttpDelete]
-        [Route("removeSeller/{sellerEmail}")]
-        public bool RemoveSeller(string sellerEmail)
+        [Route("removeSeller/{sellerId}")]
+        public bool RemoveSeller(int sellerId)
         {
-            Seller? sel = database.Seller.Where(s => s.Email == sellerEmail).FirstOrDefault();
+            Seller? sel = database.Seller.Where(s => s.Id == sellerId).FirstOrDefault();
             if (sel != null)
             {
                 database.Seller.Remove(sel);
