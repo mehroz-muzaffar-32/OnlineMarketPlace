@@ -292,8 +292,6 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
                 sel.Address = UpdatedSeller.Address;
             if (UpdatedSeller.Contact != null && UpdatedSeller.Contact != "")
                 sel.Contact = UpdatedSeller.Contact;
-            if (UpdatedSeller.Email != null && UpdatedSeller.Email != "")
-                sel.Email = UpdatedSeller.Email;
             if (UpdatedSeller.Password != null && UpdatedSeller.Password != "" && UpdatedSeller.Password.Length>=8)
                 sel.Password = UpdatedSeller.Password;
             if (UpdatedSeller.ShopName != null && UpdatedSeller.ShopName != "")
