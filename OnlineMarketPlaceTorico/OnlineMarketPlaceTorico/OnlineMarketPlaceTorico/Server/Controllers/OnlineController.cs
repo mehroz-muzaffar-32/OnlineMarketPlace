@@ -21,7 +21,12 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
         [Route("getAll")]
         public List<Category> GetAll()
         {
-            return database.Category.ToList(); 
+            return database.Category.ToList();
+        }
+        [Route("getAllShops")]
+        public List<Seller> GetAllShops()
+        {
+            return database.Seller.ToList();
         }
 
         //Used in homepage

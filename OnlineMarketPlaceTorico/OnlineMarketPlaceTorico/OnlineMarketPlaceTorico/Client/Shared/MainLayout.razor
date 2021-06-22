@@ -12,8 +12,9 @@
             </div>
             <div class="container-fluid navbar-nav float-left ml-auto mr-auto p-0" id="navbarSupportedContent">
                 <span style="display:contents">
-                    <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" @bind-value="NavbarString"/>
-                    <a href="/search/@Category/@NavbarString" class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();" onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Search'});">
+                    <input type="search" id="form1" style="width:30vw;" class="form-control" placeholder="Search" @bind-value="NavbarString" />
+                    <!-- onclick="gtag('event', 'click', {'event_category' : 'Home','event_label' : 'Search'});"-->
+                    <a href="/search/@Category/@SearchString" class="btn btn-success btn-md btn-set waves-effect" style="width:fit-content();" @onclick="CallMe">
                         <i class="fas fa-search"></i><span class=" text-set"></span>
                     </a>
                 </span>
@@ -73,7 +74,11 @@
     </div>
 </div>
 @code{
-    
+
+
+    private string? NavbarString { get; set; } = null;
+    private string? Category { get; set; } = null;
+    private string? SearchString { get; set; }
     private LoginDisplay ld;
     async Task clickFun()
     {
@@ -82,6 +87,9 @@
         await ld.BeginSignOut();
     }
 
-    private string? NavbarString { get; set; } = null;
-    private string? Category { get; set; } = null;
+    private void CallMe()
+    {
+        SearchString = NavbarString;
+        NavbarString = "";
+    }
 }
