@@ -1,17 +1,21 @@
-﻿<div class='col-md-3 float-left mt-2 mb-2'>
+﻿<div class='mt-2 mb-3'>
     <div class="card text-center">
-        <div class="card-header bg-white">
+        <div class="card-header bg-warning">
         </div>
-        <div class="card-body">
-            <h5 class="card-text text-secondary">Shop Name: @shop.ShopName</h5>
-            <h5 class="card-text text-secondary">Address: @shop.Address</h5>
-            <h5 class="card-text text-secondary">Contact: @shop.Contact</h5>
-            <h5 class="card-text text-secondary">Email: @shop.Email</h5>
-            <button class='btn btn-outline-danger waves-effect' @onclick="()=>fun(shop.Id)">
-                <i class='fas fa-store-alt'></i>  ViSit SHoP
-            </button>
+        <div class="card-body row">
+            <div class="col-md-6">
+                <h5 class="text-secondary" style="font-style:italic;">Shop Name: @shop.ShopName</h5>
+                <h5 class="text-secondary" style="font-style:italic;">Address: @shop.Address</h5>
+                <h5 class="text-secondary" style="font-style:italic;">Contact: @shop.Contact</h5>
+                <h5 class="text-secondary" style="font-style:italic;">Email: @shop.Email</h5>
+            </div>
+            <div class="col-md-6">
+                <button class='btn btn-outline-danger waves-effect' @onclick="()=>fun(shop.Id)">
+                    <i class='fas fa-store-alt'></i>  <b>ViSit SHoP</b>
+                </button>
+            </div>
         </div>
-        <div class="card-footer bg-secondary">
+        <div class="card-footer bg-warning">
         </div>
     </div>
 </div>
