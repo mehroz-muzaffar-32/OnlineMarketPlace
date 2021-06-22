@@ -1,25 +1,36 @@
-﻿<div class='col-md-3 float-left mt-2 mb-2'>
+﻿@inject HttpClient Http
+@inject ProductService service
+<div class='col-md-3 float-left mt-2 mb-2'>
     <div class='card h-100'>
-        <img src='@GridItemValue.Image' class='card-img-top img-fluid' style='width:100%;height:15vw;object-fit:cover' alt="No Image of this Product" />
+        <img src='@GridItemValue.Picture' class='card-img-top img-fluid' style='width:100%;height:15vw;object-fit:cover' alt="No Image of this Product" />
         <div class='card-body text-center'>
-            <h3 class="h3">@GridItemValue.ItemName</h3>
+            <h3 class="h3">@GridItemValue.Name</h3>
             <h5 class="h5">Quantity: <span class="font-weight-light">@GridItemValue.Quantity</span></h5>
             <h5 class="h5">Price: <span class="font-weight-light">Rs.@String.Format("{0:n0}", GridItemValue.Price)</span></h5>
+            @if (GridItemValue.Discount != 0)
+            {
+                <h5 class="h5">Discount: <span class="font-weight-light">@GridItemValue.Discount%</span></h5>
+                <h5 class="h5">Discounted Price: <span class="font-weight-light">Rs.@String.Format("{0:n0}", ((100 - GridItemValue.Discount) * GridItemValue.Price) / 100)</span></h5>
+            }
+            <h5 class="h5">Product Added On: <span class="font-weight-light">@GridItemValue.CreationDate.GetValueOrDefault().ToString("MM/dd/yyyy")</span></h5>
             <h5 class="h5">Brand: <span class="font-weight-light">@GridItemValue.Brand</span></h5>
-            <h5 class="h5">Category: <span class="font-weight-light">@GridItemValue.Category</span></h5>
-            <a class="btn btn-warning" href="/UpdateItem/@ItemsList.IndexOf(GridItemValue)">Update</a>
-            <button class="btn btn-danger" @onclick="@(CallMethod)">Remove</button>
+            <h5 class="h5">Category: <span class="font-weight-light">@ItemsRepository.Categories.Find(cat => cat.Id == GridItemValue.CategoryId).Name</span></h5>
+            <a class="btn btn-warning" href="/UpdateItem/@GridItemValue.Id">Update</a>
+            <button class="btn btn-danger" @onclick="@(RemoveProduct)">Remove</button>
         </div>
     </div>
 </div>
 
 @code {
     [Parameter]
-    public Item GridItemValue { set; get; }
+    public Product GridItemValue { set; get; }
     [Parameter]
-    public EventCallback<string> CallBackRemove { set; get; }
-    void CallMethod()
+    public EventCallback StateUpdated { get; set; }
+
+    async Task RemoveProduct()
     {
-        CallBackRemove.InvokeAsync(GridItemValue.ItemName);
+        await Http.DeleteAsync($"https://localhost:44390/api/online/delete/{GridItemValue.Id}");
+        ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
+        await StateUpdated.InvokeAsync(null);
     }
 }

@@ -1,16 +1,17 @@
 ﻿@page "/AddItem"
 @inject NavigationManager manager
 @inject IJSRuntime JS
+@inject HttpClient Http
+@inject ProductService service
 <h4 class="text-center mt-4">Please Enter Product Details Below:</h4>
 <form class="text-left" id="addform">
-    <input type="hidden" asp-for="Type" value="Regular" />
     <table class="m-auto w-50">
         <tr>
             <td>
                 <label class="col-form-label" for="Name">Product Name: </label>
             </td>
             <td>
-                <input class="form-control" @bind-value="value.ItemName" name="Name" id="Name"/>
+                <input class="form-control" @bind-value="value.Name" name="Name" id="Name" />
             </td>
         </tr>
         <tr>
@@ -18,7 +19,15 @@
                 <label class="col-form-label" for="Price">Product Price: </label>
             </td>
             <td>
-                <input class="form-control" @bind-value="value.Price" type="number" name="Price" id="Price" />
+                <input class="form-control" @bind-value="value.Price" type="number" name="Price" id="Price" min="0"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="col-form-label" for="Discount">Product Discount: </label>
+            </td>
+            <td>
+                <input class="form-control" @bind-value="value.Discount" type="number" name="Discount" id="Discount" min="0" max="100"/>
             </td>
         </tr>
         <tr>
@@ -26,7 +35,7 @@
                 <label class="col-form-label" for="Quantity">Product Quantity: </label>
             </td>
             <td>
-                <input class="form-control" @bind-value="value.Quantity" type="number" name="Quantity" id="Quantity" />
+                <input class="form-control" @bind-value="value.Quantity" type="number" name="Quantity" id="Quantity" min="0" />
             </td>
         </tr>
         <tr>
@@ -42,29 +51,76 @@
                 <label class="col-form-label" for="Category">Product Category: </label>
             </td>
             <td>
-                <select id="Category" name="Category" class="custom-select" form="addform" @bind-value="value.Category" @bind-value:event="onchange">
-                    <option value="Accessories">Accessories</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Appliances">Appliances</option>
-                    <option value="Other">Other</option>
+                <select id="Category" name="Category" class="custom-select" form="addform" @bind-value="value.CategoryId" @bind-value:event="onchange">
+                    <option>Select Category</option>
+                    @foreach (Category cat in ItemsRepository.Categories)
+                    {
+                        <option value=@cat.Id>@cat.Name</option>
+                    }
                 </select>
             </td>
         </tr>
         <tr>
+            <td colspan="2" class="text-center">
+                <p class="validation-message">@ErrorMessage</p>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2" class="text-right">
-                <input class="btn btn-success" id="submitBtn" type="button" value="Add Product" @onclick="SubmitForm"/>
+                <input class="btn btn-success" id="submitBtn" type="button" value="Add Product" @onclick="SubmitForm" />
             </td>
         </tr>
     </table>
 </form>
 
 @code {
-    Item value = new Item();
+    static Random rand = new Random();
+    string ErrorMessage = "";
+    Product value = new Product { SellerId=ItemsRepository.CurrentSellerId,CreationDate=DateTime.Now,Picture=ItemsRepository.Pictures.ElementAt(rand.Next(0,Pictures.Count()))};
     async Task SubmitForm()
     {
-        ItemsRepository.ItemsList.Add(value);
-        await JS.InvokeVoidAsync("gtagH");
-        manager.NavigateTo("/SellerItems");
-
+        if (value.Name==null || value.Name=="")
+        {
+            ErrorMessage = "Product Name Cannot Be Empty";
+        }
+        else if(value.Price==null)
+        {
+            ErrorMessage = "Product Price Cannot Be Empty";
+        }
+        else if (value.Price < 0)
+        {
+            ErrorMessage = "Product Price Must be greater than 0";
+        }
+        else if (value.Discount == null)
+        {
+            ErrorMessage = "Product Discount Cannot Be Empty";
+        }
+        else if (value.Discount <0 || value.Discount >100)
+        {
+            ErrorMessage = "Product Discount Must Be Between 0 to 100";
+        }
+        else if (value.Quantity == null)
+        {
+            ErrorMessage = "Product Quantity Cannot Be Empty";
+        }
+        else if (value.Quantity <0)
+        {
+            ErrorMessage = "Product Quantity Must be greater than 0";
+        }
+        else if (value.Brand == null || value.Brand == "")
+        {
+            ErrorMessage = "Product Brand Cannot Be Empty";
+        }
+        else if (value.CategoryId == null)
+        {
+            ErrorMessage = "Product Category Cannot Be Empty";
+        }
+        else
+        {
+            await Http.PostAsJsonAsync("https://localhost:44390/api/online/add", value);
+            ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
+            await JS.InvokeVoidAsync("gtagH");
+            manager.NavigateTo("/SellerItems");
+        }
     }
 }

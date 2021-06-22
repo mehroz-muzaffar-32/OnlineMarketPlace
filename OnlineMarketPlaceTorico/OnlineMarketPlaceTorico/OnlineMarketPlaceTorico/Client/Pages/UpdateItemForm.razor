@@ -1,5 +1,7 @@
-﻿@page "/UpdateItem/{Index:int}"
+﻿@page "/UpdateItem/{ProductId:int}"
 @inject NavigationManager manager
+@inject HttpClient Http
+@inject ProductService service
 <!--TODO look at these red lines/errors, code works correctly but somehow it shows errors.  -->
 <h4 class="text-center mt-4">Please Change Following Details (if any):</h4>
 <form action="/SellerItems" class="text-left" method="get" runat="server" EncType="multipart/form-data">
@@ -10,7 +12,7 @@
                 <label class="col-form-label" for="Name">Product Name: </label>
             </td>
             <td>
-                <input class="form-control" @bind-value="ItemsList[Index].ItemName" name="Name" id="Name" />
+                <input class="form-control" @bind-value="value.Name" name="Name" id="Name" />
             </td>
         </tr>
         <tr>
@@ -18,7 +20,15 @@
                 <label class="col-form-label" for="Price">Product Price: </label>
             </td>
             <td>
-                <input class="form-control" type="number" @bind-value="ItemsList[Index].Price" name="Price" id="Price" />
+                <input class="form-control" type="number" @bind-value="value.Price" name="Price" id="Price" min="0"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="col-form-label" for="Discount">Product Discount: </label>
+            </td>
+            <td>
+                <input class="form-control" @bind-value="value.Discount" type="number" name="Discount" id="Discount" min="0" max="100" />
             </td>
         </tr>
         <tr>
@@ -26,7 +36,7 @@
                 <label class="col-form-label" for="Quantity">Product Quantity: </label>
             </td>
             <td>
-                <input class="form-control" type="number" @bind-value="ItemsList[Index].Quantity" name="Quantity" id="Quantity" />
+                <input class="form-control" type="number" @bind-value="value.Quantity" name="Quantity" id="Quantity" min="0" />
             </td>
         </tr>
         <tr>
@@ -34,7 +44,7 @@
                 <label class="col-form-label" for="Brand">Product Brand: </label>
             </td>
             <td>
-                <input class="form-control" @bind-value="ItemsList[Index].Brand" name="Brand" id="Brand" />
+                <input class="form-control" @bind-value="value.Brand" name="Brand" id="Brand" />
             </td>
         </tr>
         <tr>
@@ -42,12 +52,18 @@
                 <label class="col-form-label" for="Category">Product Category: </label>
             </td>
             <td>
-                <select id="Category" @bind-value="ItemsList[Index].Category" @bind-value:event="onchange" class="custom-select">
-                    <option>Accessories</option>
-                    <option>Clothing</option>
-                    <option>Appliances</option>
-                    <option>Other</option>
+                <select id="Category" name="Category" class="custom-select" form="addform" @bind-value="value.CategoryId" @bind-value:event="onchange">
+                    <option>Select Category</option>
+                    @foreach (Category cat in ItemsRepository.Categories)
+                    {
+                        <option value=@cat.Id>@cat.Name</option>
+                    }
                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <p class="validation-message">@ErrorMessage</p>
             </td>
         </tr>
         <tr>
@@ -60,9 +76,59 @@
 
 @code {
     [Parameter]
-    public int Index{ get; set; }
-    void SubmitForm()
+    public int ProductId { get; set; }
+    Product value;
+    string ErrorMessage = "";
+
+    protected override async Task OnParametersSetAsync()
     {
-        manager.NavigateTo("/SellerItems");
+        await base.OnParametersSetAsync();
+        value = ItemsRepository.ItemsList.Find(prod => prod.Id == ProductId);
+    }
+
+    async Task SubmitForm()
+    {
+        if (value.Name == null || value.Name == "")
+        {
+            ErrorMessage = "Product Name Cannot Be Empty";
+        }
+        else if (value.Price == null)
+        {
+            ErrorMessage = "Product Price Cannot Be Empty";
+        }
+        else if (value.Price < 0)
+        {
+            ErrorMessage = "Product Price Must be greater than 0";
+        }
+        else if (value.Discount == null)
+        {
+            ErrorMessage = "Product Discount Cannot Be Empty";
+        }
+        else if (value.Discount < 0 || value.Discount > 100)
+        {
+            ErrorMessage = "Product Discount Must Be Between 0 to 100";
+        }
+        else if (value.Quantity == null)
+        {
+            ErrorMessage = "Product Quantity Cannot Be Empty";
+        }
+        else if (value.Quantity < 0)
+        {
+            ErrorMessage = "Product Quantity Must be greater than 0";
+        }
+        else if (value.Brand == null || value.Brand == "")
+        {
+            ErrorMessage = "Product Brand Cannot Be Empty";
+        }
+        else if (value.CategoryId == null)
+        {
+            ErrorMessage = "Product Category Cannot Be Empty";
+        }
+        else
+        {
+            await Http.PutAsJsonAsync($"https://localhost:44390/api/online/update/{value.Id}", value);
+            ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
+            manager.NavigateTo("/SellerItems");
+        }
     }
 }

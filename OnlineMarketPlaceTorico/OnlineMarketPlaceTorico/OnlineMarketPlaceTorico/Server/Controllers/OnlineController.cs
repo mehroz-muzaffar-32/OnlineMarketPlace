@@ -18,6 +18,7 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
             database = new OnlineMarketPlace_DBContext();
         }
         [HttpGet]
+        [Route("getAll")]
         public List<Category> GetAll()
         {
             return database.Category.ToList(); 
@@ -252,6 +253,56 @@ namespace OnlineMarketPlaceTorico.Server.Controllers
             {
                 return false;
             }
+        }
+        [HttpPost]
+        [Route("addNewSeller/{newSellerJSON}")]
+        public bool AddNewSeller(string newSellerJSON)
+        {
+            try
+            {
+                Seller newSeller = System.Text.Json.JsonSerializer.Deserialize<Seller>(newSellerJSON);
+                database.Seller.Add(newSeller);
+                database.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        [HttpGet]
+        [Route("getSeller/{sellerEmail}")]
+        public Seller GetSeller(string sellerEmail)
+        {
+            return database.Seller.Where(s => s.Email == sellerEmail).FirstOrDefault();
+        }
+        [HttpGet]
+        [Route("getSellerId/{sellerEmail}")]
+        public int GetSellerId(string sellerEmail)
+        {
+            return database.Seller.Where(s => s.Email == sellerEmail).FirstOrDefault().Id;
+        }
+        [HttpDelete]
+        [Route("removeSeller/{sellerEmail}")]
+        public bool RemoveSeller(string sellerEmail)
+        {
+            Seller? sel = database.Seller.Where(s => s.Email == sellerEmail).FirstOrDefault();
+            if (sel != null)
+            {
+                database.Seller.Remove(sel);
+                database.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        [HttpGet]
+        [Route("getCategoryName/{categoryId}")]   //id is compulsory
+        public string GetCategoryName(int categoryId)
+        {
+            return database.Category.Where(c=>c.Id==categoryId).FirstOrDefault().Name;
         }
     }
 }

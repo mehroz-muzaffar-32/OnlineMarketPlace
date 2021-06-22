@@ -1,4 +1,11 @@
 ﻿@page "/SellerItems"
+@using System.Security.Claims
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+@inject HttpClient Http
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ProductService service
 
 <div class="ml-4 mt-4">
     <a class="btn btn-success" href="/AddItem">Add Product</a>
@@ -9,18 +16,18 @@
 @if (Layout == "List")
 {
     <div class="list-group">
-        @foreach (Item item in ItemsRepository.ItemsList)
+        @foreach (Product item in ItemsRepository.ItemsList)
         {
-            <ListItem ListItemValue=@item CallBackRemove="RemoveItem"></ListItem>
+            <ListItem ListItemValue=@item StateUpdated=@StateHasChanged></ListItem>
         }
     </div>
 }
 else if (Layout == "Grid")
 {
     <div class="container-fluid float-left align-content-center">
-        @foreach (Item item in ItemsRepository.ItemsList)
+        @foreach (Product item in ItemsRepository.ItemsList)
         {
-            <GridItem GridItemValue=@item CallBackRemove="RemoveItem"></GridItem>
+            <GridItem GridItemValue=@item StateUpdated=@StateHasChanged></GridItem>
         }
     </div>
 }
@@ -32,12 +39,25 @@ else if (Layout == "Grid")
         Layout = value;
         ItemsRepository.View = value;
     }
-    void RemoveItem(string name)
+    private string sellerEmail;
+
+    protected override async Task OnParametersSetAsync()
     {
-        ItemsRepository.ItemsList.RemoveAll(item => item.ItemName == name);
+        await base.OnParametersSetAsync();
+        await SetSellerEmail();
+        ItemsRepository.CurrentSellerId = await service.GetSellerId(sellerEmail);
+        ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
+        ItemsRepository.Categories = await service.GetCategoriesList();
     }
-    void AddNewItem(Item item)
+
+    private async Task SetSellerEmail()
     {
-        ItemsRepository.ItemsList.Add(item);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        sellerEmail = user.FindFirst(c => c.Type == "preferred_username")?.Value;
     }
+    //Seller seller;
+    //int 
+    //private async Task GetSellerIdOrAddNewOne() =>
+    //    await Http.GetFromJsonAsync<Seller>("https://localhost:44390/api/online/getSellerIdOrAddNewOne/seller");
 }

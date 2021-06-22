@@ -1,30 +1,42 @@
-﻿<div class="list-group-item list-group-item">
+﻿@inject ProductService service
+@inject HttpClient Http
+@inject NavigationManager manager
+<div class="list-group-item list-group-item">
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
-                <img style="width:inherit;height:200px;object-fit:contain;" src="@ListItemValue.Image" alt="No Image of this Product" />
+                <img style="width:inherit;height:200px;object-fit:contain;" src="@ListItemValue.Picture" alt="No Image of this Product" />
             </div>
             <div class="col-6 align-top">
-                <h3 class="h3">@ListItemValue.ItemName</h3>
+                <h3 class="h3">@ListItemValue.Name</h3>
                 <h5 class="h5">Quantity: <span class="font-weight-light">@ListItemValue.Quantity</span></h5>
                 <h5 class="h5">Price: <span class="font-weight-light">Rs.@String.Format("{0:n0}", ListItemValue.Price)</span></h5>
+                @if (ListItemValue.Discount != 0)
+                {
+                    <h5 class="h5">Discount: <span class="font-weight-light">@ListItemValue.Discount%</span></h5>
+                    <h5 class="h5">Discounted Price: <span class="font-weight-light">Rs.@String.Format("{0:n0}", ((100 - ListItemValue.Discount) * ListItemValue.Price) / 100)</span></h5>
+                }
+                <h5 class="h5">Product Added On: <span class="font-weight-light">@ListItemValue.CreationDate.GetValueOrDefault().ToString("MM/dd/yyyy")</span></h5>
                 <h5 class="h5">Brand: <span class="font-weight-light">@ListItemValue.Brand</span></h5>
-                <h5 class="h5">Category: <span class="font-weight-light">@ListItemValue.Category</span></h5>
+                <h5 class="h5">Category: <span class="font-weight-light">@ItemsRepository.Categories.Find(cat => cat.Id == ListItemValue.CategoryId).Name</span></h5>
             </div>
             <div class="col-4 text-right">
-                <a class="btn btn-warning" href="/UpdateItem/@ItemsList.IndexOf(ListItemValue)">Update</a>
-                <button class="btn btn-danger" @onclick="@(CallMethod)">Remove</button>
+                <a class="btn btn-warning" href="/UpdateItem/@ListItemValue.Id">Update</a>
+                <button class="btn btn-danger" @onclick="@(RemoveProduct)">Remove</button>
             </div>
         </div>
     </div>
 </div>
 @code {
     [Parameter]
-    public Item ListItemValue { get; set; }
+    public Product ListItemValue { get; set; }
     [Parameter]
-    public EventCallback<string> CallBackRemove { set; get; }
-    void CallMethod()
+    public EventCallback StateUpdated { get; set; }
+
+    async Task RemoveProduct()
     {
-        CallBackRemove.InvokeAsync(ListItemValue.ItemName);
+        await Http.DeleteAsync($"https://localhost:44390/api/online/delete/{ListItemValue.Id}");
+        ItemsRepository.ItemsList = await service.GetProductsListOfSeller(ItemsRepository.CurrentSellerId);
+        await StateUpdated.InvokeAsync(null);
     }
 }
