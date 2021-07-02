@@ -18,25 +18,28 @@
             <li data-target="#multi-item-example" data-slide-to="1"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-            @for (int i = 0; i < DB.Count; i++)
+            @if (DB != null)
             {
-                @if (i == 0)
+                @for (int i = 0; i < DB.Count; i++)
                 {
-                    <div class="carousel-item active">
-                        @for (int j = 0; j < 4; j++)
+                    @if (i == 0)
+                    {
+                        <div class="carousel-item active">
+                            @for (int j = 0; j < 4 && j<DB.Count; j++)
+                            {
+                                <ItemCard item="DB[j]" CallBack="ShowModal"></ItemCard>
+                            }
+                        </div>
+                        i += 3;
+                    }
+                    <div class="carousel-item">
+                        @for (int j = 0; j < 4 && i < DB.Count; j++)
                         {
-                            <ItemCard item="DB[j]" CallBack="ShowModal"></ItemCard>
+                            <ItemCard item="DB[i]" CallBack="ShowModal"></ItemCard>
+                            i++;
                         }
                     </div>
-                    i += 3;
                 }
-                <div class="carousel-item">
-                    @for (int j = 0; j < 4 && i < DB.Count; j++)
-                    {
-                        <ItemCard item="DB[i]" CallBack="ShowModal"></ItemCard>
-                        i++;
-                    }
-                </div>
             }
         </div>
     </div>
@@ -82,7 +85,7 @@
     };*/
 
     [Parameter]
-    public List<Product> DB { get; set; } = new List<Product>();   //will be received as parameter
+    public List<Product> DB { get; set; } = null;   //will be received as parameter
 
     public Seller? SellerShop { get; set; } = null;
 
