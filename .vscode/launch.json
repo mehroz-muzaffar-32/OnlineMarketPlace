@@ -1,0 +1,59 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "[https] Run Server",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Server/Torico.Server.csproj",
+            "launchConfigurationId": "TargetFramework=;https",
+        },
+        {
+            "name": ".NET Stalker (Chrome)",
+            "type": "stalker",
+            "request": "launch",
+            "vars": {
+                "framework": "net8.0",
+                "backendProjectDir": "${workspaceFolder}/${var:backend}",
+                "frontendProjectDir": "${workspaceFolder}/${var:frontend}",
+                "projectName": "Torico",
+                "backend": "Server",
+                "frontend": "Client",
+            },
+            "project": "${var:backendProjectDir}/${var:projectName}.${var:backend}.csproj",
+            "process": "${var:backendProjectDir}/bin/Debug/${var:framework}/${var:projectName}.${var:backend}.exe",
+            "cwd": "${var:backendProjectDir}",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+            },
+            "webRoot": "${var:frontendProjectDir}/wwwroot",
+            // "processOptions": {
+            //     "launchSettingsProfile": "https"
+            // },
+            "serverReadyAction": {
+                "action": "debugWithChrome",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "%s"
+            }
+        },
+        {
+            "name": ".NET Stalker Minimal",
+            "type": "stalker",
+            "request": "launch",
+            "project": "${workspaceFolder}\\Server\\Torico.Server.csproj",
+            "process": "${workspaceFolder}\\Server\\bin\\Debug\\net8.0\\Torico.Server",
+            "cwd": "${workspaceFolder}\\Client\\wwwroot",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "vars": {
+                "framework": "net8.0",
+                "projectDir": "${workspaceFolder}/src/${var:projectName}",
+                "projectName": "Server"
+            }
+        }
+    ]
+}

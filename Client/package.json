@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.1"
+  },
+  "scripts": {
+    "build:web": "dotnet watch run --launch-profile https",
+    "build:css": "tailwindcss -i ./wwwroot/css/tailwind/input.css -o ./wwwroot/css/tailwind/output.css --watch --poll"
+  }
+}

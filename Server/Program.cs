@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Torico.Server.Data;
+using Torico.Server.Repositories.Core;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
@@ -6,6 +10,14 @@ builder.Services.AddRazorPages();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Starting
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string not found"));
+});
+builder.Services.AddScoped<Services>();
+// Ending
 
 var app = builder.Build();
 

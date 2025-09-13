@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torico.Server", "Server\Tor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torico.Client", "Client\Torico.Client.csproj", "{0CA7223D-2B75-464E-A690-4CED8271194B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torico.Tests", "Tests\Torico.Tests.csproj", "{E80FA082-6CDD-485D-BA62-252C4E50ED16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{0CA7223D-2B75-464E-A690-4CED8271194B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CA7223D-2B75-464E-A690-4CED8271194B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CA7223D-2B75-464E-A690-4CED8271194B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
