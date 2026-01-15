@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torico.Shared", "Shared\Torico.Shared.csproj", "{EC731FB9-897F-4A44-A89F-BB205A8242DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torico.Server", "Server\Torico.Server.csproj", "{596526F4-6B78-4558-BB30-BF4F7D0E5038}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torico.Client", "Client\Torico.Client.csproj", "{0CA7223D-2B75-464E-A690-4CED8271194B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torico.Tests", "Tests\Torico.Tests.csproj", "{E80FA082-6CDD-485D-BA62-252C4E50ED16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC731FB9-897F-4A44-A89F-BB205A8242DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC731FB9-897F-4A44-A89F-BB205A8242DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC731FB9-897F-4A44-A89F-BB205A8242DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC731FB9-897F-4A44-A89F-BB205A8242DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{596526F4-6B78-4558-BB30-BF4F7D0E5038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{596526F4-6B78-4558-BB30-BF4F7D0E5038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{596526F4-6B78-4558-BB30-BF4F7D0E5038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{596526F4-6B78-4558-BB30-BF4F7D0E5038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CA7223D-2B75-464E-A690-4CED8271194B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA7223D-2B75-464E-A690-4CED8271194B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA7223D-2B75-464E-A690-4CED8271194B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA7223D-2B75-464E-A690-4CED8271194B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80FA082-6CDD-485D-BA62-252C4E50ED16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

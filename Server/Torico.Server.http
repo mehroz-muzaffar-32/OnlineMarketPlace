@@ -1,0 +1,6 @@
+@Torico.Server_HostAddress = http://localhost:5200
+
+GET {{Torico.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

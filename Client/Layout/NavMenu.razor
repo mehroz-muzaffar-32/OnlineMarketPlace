@@ -1,0 +1,56 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-secondary shadow-sm py-2">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <a class="navbar-brand d-flex align-items-center font-weight-bold" href="/">
+            <img src="appicon_w.svg" width="35" height="35" alt="App Icon" class="mr-2" /> Torico
+        </a>
+        
+        <div class="d-flex align-items-stretch flex-1">
+            <button class="btn btn-violet-dark rounded-pill-left waves-effect shadow-sm px-3 m-0 rounded-right-0" id="categoryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-list"></i> Categories
+            </button>
+            <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                <a class="dropdown-item" href="#" data-value="men">Men's Apparel</a>
+                <a class="dropdown-item" href="#" data-value="women">Women's Apparel</a>
+                <a class="dropdown-item" href="#" data-value="children">Children's Apparel</a>
+            </div>
+            <input type="search" id="form1" class="form-control w-50 border-0 rounded-0 shadow-sm h-auto flex-1" placeholder="Search..." aria-label="Search" />
+            <a href="/search" class="btn btn-violet-dark rounded-pill-right waves-effect shadow-sm px-3 m-0">
+                <i class="fas fa-search"></i>
+            </a>
+        </div>
+
+        <ul class="navbar-nav d-flex flex-row">
+            <li class="nav-item mr-2">
+                <a class="btn btn-warning text-dark rounded-pill waves-effect shadow-sm px-3" href="/SellerItems">
+                    <i class="fas fa-store"></i> Become a Seller
+                </a>
+            </li>
+            <li class="nav-item mr-2">
+                <a class="btn btn-outline-light rounded-pill waves-effect shadow-sm px-3 hover:bg-white hover:text-black" href="/cart">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </li>
+            <li class="nav-item mr-2">
+                <a class="btn btn-outline-light rounded-pill waves-effect shadow-sm px-3 hover:bg-white hover:text-black" href="/login">
+                    Login
+                </a>
+            </li>
+            <li class="nav-item mr-2">
+                <a class="btn btn-outline-light rounded-pill waves-effect shadow-sm px-3 hover:bg-white hover:text-black" href="/signup">
+                    Sign Up
+                </a>
+            </li>
+        </ul>
+        <div class="dropdown">
+            <button class="btn btn-outline-light rounded-pill waves-effect shadow-sm px-3 dropdown-toggle hover:bg-white hover:text-black" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> John Doe
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="/manage-account">Manage Account</a>
+                <a class="dropdown-item" href="/manage-shop">Manage Shop</a>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item text-danger">Logout</button>
+            </div>
+        </div>
+    </div>
+</nav>
